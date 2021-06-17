@@ -10,10 +10,10 @@ import UIKit
 
 class RecipeDetailViewController: UIViewController {
 
+
     @IBOutlet weak var recipeImgView: UIImageView!
+    
     @IBOutlet weak var recipeNameView: UILabel!
-    
-    
     
     var recipeName: String = ""
     var recipeImg: String = ""
@@ -27,13 +27,5 @@ class RecipeDetailViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
 
 }
