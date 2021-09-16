@@ -172,28 +172,25 @@
             </objects>
             <point key="canvasLocation" x="-430" y="514"/>
         </scene>
-        <!--Добавление ингредиентов-->
+        <!--Категории-->
         <scene sceneID="JVQ-dh-XJd">
             <objects>
-                <tableViewController id="ejF-qP-Trc" sceneMemberID="viewController">
+                <tableViewController id="ejF-qP-Trc" customClass="CategoryIngridViewController" customModule="Project_D_06_21" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="RPG-ma-WfB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="fTz-gM-xrF">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Category" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Category" id="fTz-gM-xrF">
                                 <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fTz-gM-xrF" id="J0b-f9-j6h">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E7X-jY-G4D">
-                                            <rect key="frame" x="361" y="9" width="25" height="24"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </button>
-                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="KLN-ui-d21" kind="show" identifier="categoryIngrids" id="Kfg-ma-RoD"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -201,11 +198,57 @@
                             <outlet property="delegate" destination="ejF-qP-Trc" id="pLK-pJ-nSi"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Добавление ингредиентов" id="dG1-hQ-LwU"/>
+                    <navigationItem key="navigationItem" title="Категории" id="dG1-hQ-LwU"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M5b-MB-m4H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2574" y="122"/>
+            <point key="canvasLocation" x="2573.913043478261" y="121.875"/>
+        </scene>
+        <!--Добавление ингредиентов-->
+        <scene sceneID="ljr-sD-XiK">
+            <objects>
+                <tableViewController id="KLN-ui-d21" customClass="AddIngridViewController" customModule="Project_D_06_21" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="yPt-CK-JTK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="IngridientCell" id="Mzc-5i-uGU" customClass="AddIngridTableViewCell" customModule="Project_D_06_21" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Mzc-5i-uGU" id="Rng-vY-puF">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E7X-jY-G4D">
+                                            <rect key="frame" x="374" y="10" width="25" height="24"/>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="E7X-jY-G4D" firstAttribute="centerY" secondItem="Rng-vY-puF" secondAttribute="centerY" id="9Vj-Yd-3Zd"/>
+                                        <constraint firstAttribute="trailing" secondItem="E7X-jY-G4D" secondAttribute="trailing" constant="15" id="LyO-4v-16J"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="addIngridButton" destination="E7X-jY-G4D" id="bHi-fM-RTU"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="KLN-ui-d21" id="RxY-pN-Ccv"/>
+                            <outlet property="delegate" destination="KLN-ui-d21" id="dhh-zW-Ujm"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Добавление ингредиентов" id="eIB-f6-lwE">
+                        <barButtonItem key="backBarButtonItem" title="аа" id="7wI-eq-89K"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="table" destination="yPt-CK-JTK" id="fdN-pW-bcx"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wq5-CT-0EN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3614" y="122"/>
         </scene>
     </scenes>
     <resources>
