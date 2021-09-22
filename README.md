@@ -1,9 +1,10 @@
 # Project_D_06.21
+**Приложение “Чайник на кухне”**
 
-<<<<<<< HEAD
-/Users/vladislavkomsomolenko/Desktop/Simulator Screen Shot - iPhone 8 - 2021-09-22 at 14.35.04.png
+Приложение для поиска рецептов по имеющимся ингредиентам
 
-/Users/vladislavkomsomolenko/Desktop/Simulator Screen Shot - iPhone 8 - 2021-09-22 at 14.35.21.png
-=======
-Приложение для поиска рецептов по имеющимся ингредиентам.
->>>>>>> b6805c4461b236e541fb5ab0ed417e62c33551ee
+На момент 22.08.2020:
+
+![](readmeImg/screen1.png)
+
+![](readmeImg/screen2.png)
