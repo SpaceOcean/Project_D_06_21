@@ -1,5 +1,4 @@
 //
-
 //  IngredientsViewController.swift
 //  Project_D_06_21
 //
@@ -16,63 +15,27 @@ class IngredientsViewController: UITableViewController, NSFetchedResultsControll
     var allIngridients: [Ingridient] = []
     var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    // MARK: - GET DATA FROM FILE
     
-    func getDataFrom() {
-        
-        // print("getdtatatatatingrid")
-        let fetchRequest: NSFetchRequest<Ingridient> = Ingridient.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "name != nil")
-        // fetchRequest.delegate = self
-        
-        do {
-            allIngridients = try context.fetch(fetchRequest)
-            //allIngridients.sort(by: { $0.name! < $1.name! })
-
-        } catch {
-            print(error.localizedDescription)
-        }
-        var records = 0
-        do {
-            records = try context.count(for: fetchRequest)
-        } catch let error as NSError {
-            print(error.localizedDescription)
-        }
-        guard records == 0 else {
-            return
-        }
     
-        
-        guard let pathToFile = Bundle.main.path(forResource: "normalIngrid", ofType: "plist") else {
-            return
-            
-        }
-        let dataArray = NSArray(contentsOfFile: pathToFile)!
-
-        for dictionary in dataArray {
-            let entity = NSEntityDescription.entity(forEntityName: "Ingridient", in: context)
-            let ingrid = NSManagedObject(entity: entity!, insertInto: context) as! Ingridient
-            let ingridDictionary = dictionary as! [String : Any]
-            ingrid.name = ingridDictionary["name"] as? String
-            ingrid.index = ingridDictionary["index"] as? String
-            ingrid.category = ingridDictionary["category"] as! Int32
-            ingrid.added = false
-        }
-    }
     
     // MARK: - viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getDataFrom()
-        
         
         let fetchRequest: NSFetchRequest<Ingridient> = Ingridient.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "added = true")
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
+        do {
+            allIngridients = try context.fetch(fetchRequest)
+
+        } catch {
+            print(error.localizedDescription)
+        }
         
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        fetchRequest.predicate = NSPredicate(format: "added = true")
+        
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
          fetchedResultsController.delegate = self
         
@@ -108,6 +71,7 @@ class IngredientsViewController: UITableViewController, NSFetchedResultsControll
             tableView.reloadData()
         }
         curIngridients = controller.fetchedObjects as! [Ingridient]
+
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -132,12 +96,12 @@ class IngredientsViewController: UITableViewController, NSFetchedResultsControll
     private func deleteIngrid(rowIndexPathAt indexPath: IndexPath) -> UIContextualAction {
         let deleteAction = UIContextualAction(style: .normal, title: "Удалить") {
          _, _, _ in
-            
             let curIngridientIndex = indexPath.row
             let curIngridient = self.curIngridients[curIngridientIndex]
             let normalIndex = self.allIngridients.firstIndex{$0 === curIngridient}!
-            self.curIngridients.remove(at: indexPath.row)
+            self.curIngridients.remove(at: curIngridientIndex)
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            print(self.allIngridients[normalIndex].added)
             self.allIngridients[normalIndex].added = false
             do {
                 try self.context.save()
@@ -152,6 +116,7 @@ class IngredientsViewController: UITableViewController, NSFetchedResultsControll
         let delete = self.deleteIngrid(rowIndexPathAt: indexPath)
         delete.backgroundColor = UIColor.red
         let swipe = UISwipeActionsConfiguration(actions: [delete])
+
         
         return swipe
       }

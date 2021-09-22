@@ -17,9 +17,8 @@ class AddIngridViewController: UITableViewController{
     var allIngridients: [Ingridient] = []
     var category: Int = 0
     lazy var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    override func viewWillAppear(_ animated: Bool) {
         
         print(ingridients.count)
         let fetchRequest: NSFetchRequest<Ingridient>  = Ingridient.fetchRequest()
@@ -45,6 +44,13 @@ class AddIngridViewController: UITableViewController{
         } catch {
             print(error.localizedDescription)
         }
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -73,7 +79,6 @@ class AddIngridViewController: UITableViewController{
         print(allIngridients[normalIndex].added)
         // let ingrid = Ingridient(context: context)
         // ingrid.added = true
-        
         do {
             try context.save()
         } catch let error as NSError {
@@ -81,5 +86,6 @@ class AddIngridViewController: UITableViewController{
         }
         // myIngridTable.reloadData()
     }
+
 }
  

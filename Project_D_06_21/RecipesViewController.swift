@@ -8,115 +8,85 @@
 import UIKit
 import CoreData
 
-class RecipesViewController: UITableViewController {
+class RecipesViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     lazy var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    @IBOutlet var recipesTable: UITableView!
+    var fetchedResultsController: NSFetchedResultsController<Ingridient>!
+    var recipeFetchedResultsController: NSFetchedResultsController<Ingridient>!
+    var curIngridientsIndex: [Int] = []
+    var curIngridients: [Ingridient] = []
     var recipes: [Recipe] = []
     var allIngrids: [MainIngridient] = []
 
-    
-    func getDataFromAllIngrids() {
-        
-        let fetchRequest: NSFetchRequest<MainIngridient> = MainIngridient.fetchRequest()
-
-        var records = 0
+    private func uploadIngridMatch() {
+        let recipeFetchRequest: NSFetchRequest<Recipe>  = Recipe.fetchRequest()
         do {
-            records = try context.count(for: fetchRequest)
-            print("Data is there already")
-        } catch let error as NSError {
+            recipes = try context.fetch(recipeFetchRequest)
+
+        } catch {
             print(error.localizedDescription)
         }
-        guard records == 0 else {
-            return
+        let fetchRequest: NSFetchRequest<Ingridient> = Ingridient.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "added = true")
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+         fetchedResultsController.delegate = self
+        do {
+            try fetchedResultsController.performFetch()
+            curIngridients = fetchedResultsController.fetchedObjects!
+            curIngridients = try context.fetch(fetchRequest)
+
+        } catch {
+            print(error.localizedDescription)
         }
         
-        guard let pathToFile = Bundle.main.path(forResource: "allIngrid", ofType: "plist") else {
-            return
-            
+        curIngridientsIndex = []
+        for ingrid in curIngridients {
+            curIngridientsIndex.append(contentsOf: ingrid.index!.components(separatedBy: ";").map{ Int($0) ?? Int(-1)})
         }
-        let dataArray = NSArray(contentsOfFile: pathToFile)!
-
-        for dictionary in dataArray {
-            let entity = NSEntityDescription.entity(forEntityName: "MainIngridient", in: context)
-            let ingrid = NSManagedObject(entity: entity!, insertInto: context) as! MainIngridient
-            let ingridDictionary = dictionary as! [String : Any]
-            ingrid.name = ingridDictionary["name"] as? String
-            ingrid.index = ingridDictionary["index"] as! Int32
+        
+            // print(recipes)
+        for recipe in recipes {
+            let indexOfRecipe = Set(recipe.ingridIndex as! [Int])
+            let buf = Array(indexOfRecipe.intersection(Set(curIngridientsIndex)))
+            recipe.ingridMatch = Double(buf.count)/Double(recipe.ingridCount)
+            // print(recipe.ingridMatch)
         }
- 
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("no save: \(error)")
+        }
         
     }
-    func getDataFromRecipes() {
-        print("getdtatatatat")
-        let fetchRequest: NSFetchRequest<Recipe> = Recipe.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "name != nil")
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        uploadIngridMatch()
+        
+        let sortRecipeFetchRequest: NSFetchRequest<Recipe>  = Recipe.fetchRequest()
+        
+        let sortDescriptor = NSSortDescriptor(key: "ingridMatch", ascending: false)
+        sortRecipeFetchRequest.sortDescriptors = [sortDescriptor]
 
-        var records = 0
         do {
-            records = try context.count(for: fetchRequest)
-            print("Data is there already")
-        } catch let error as NSError {
+            recipes = try context.fetch(sortRecipeFetchRequest)
+
+        } catch {
             print(error.localizedDescription)
         }
-        guard records == 0 else {
-            return
-        }
-        
-        guard let pathToFile = Bundle.main.path(forResource: "recipes_1", ofType: "plist") else {
-            return
-            
-        }
-        let dataArray = NSArray(contentsOfFile: pathToFile)!
-        for dictionary in dataArray {
-            let entity = NSEntityDescription.entity(forEntityName: "Recipe", in: context)
-            let recipe = NSManagedObject(entity: entity!, insertInto: context) as! Recipe
-            let recipeDictionary = dictionary as! [String : String]
-            recipe.name = recipeDictionary["name"]
-            recipe.difficulty = recipeDictionary["difficulty"]
-            recipe.group = recipeDictionary["group"]
-            recipe.ingredients = recipeDictionary["ingredients"]
-            recipe.steps = recipeDictionary["steps"]
-            recipe.img = recipeDictionary["img"]
-            // print(recipeDictionary["name"])
-            let ingrids = recipeDictionary["ingredients"]!.components(separatedBy: ";")
-            var result: Array<Int32> = []
-            for ingrid in ingrids {
-                result.append(allIngrids.filter{$0.name!.contains(ingrid) }[0].index as Int32)
-            }
-            
-            // print(ingrids)
-            // print(result)
-        }
-        
+        self.recipesTable.reloadData()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        getDataFromAllIngrids()
-        
-        let fetchAllIngridsRequest: NSFetchRequest<MainIngridient>  = MainIngridient.fetchRequest()
-        do {
-            allIngrids = try context.fetch(fetchAllIngridsRequest)
-
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-        
-        getDataFromRecipes()
-        
-        // print(recipes.count)
-        let fetchRequest: NSFetchRequest<Recipe>  = Recipe.fetchRequest()
-        do {
-            recipes = try context.fetch(fetchRequest)
-
-        } catch {
-            print(error.localizedDescription)
-        }
-
     }
+
     
-
-
+    
+    
+    // MARK: - TABLE VIEW CELL
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recipes.count
@@ -124,8 +94,7 @@ class RecipesViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath)
-        // print("recipes")
-        // print(recipes.count)
+        
         cell.textLabel?.text = recipes[indexPath.row].name
         return cell
     }
@@ -133,7 +102,7 @@ class RecipesViewController: UITableViewController {
         if segue.identifier == "recipeDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let dvc = segue.destination as! RecipeDetailViewController
-                dvc.recipeName = self.recipes[indexPath.row].name!
+                dvc.recipeName = "Коэффициент совпадения: \(self.recipes[indexPath.row].ingridMatch)"
                 dvc.recipeImg = self.recipes[indexPath.row].img!
             }
         }

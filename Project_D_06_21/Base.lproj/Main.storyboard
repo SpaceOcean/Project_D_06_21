@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="y9P-7G-A7G">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7Qe-yV-Imv">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
@@ -71,6 +71,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Рецепты" id="c2c-P9-FK3"/>
+                    <connections>
+                        <outlet property="recipesTable" destination="Jj7-Mi-yXC" id="hoN-of-bzp"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xw9-Wc-jJF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -121,8 +124,8 @@
                 <navigationController id="nb4-vR-kUJ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Рецепты" id="ES7-vs-FUf"/>
                     <navigationItem key="navigationItem" id="1yo-5D-QWv"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nhc-5C-pQ9">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="nhc-5C-pQ9">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -139,8 +142,8 @@
                 <navigationController title="Ингредиенты" automaticallyAdjustsScrollViewInsets="NO" id="9LJ-o5-r0y" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Ингредиенты" id="fCW-Ah-QWv"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Vn2-0v-IMe">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="Vn2-0v-IMe">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -249,6 +252,55 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wq5-CT-0EN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3614" y="122"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="kyF-fI-LVE">
+            <objects>
+                <viewController id="7Qe-yV-Imv" customClass="ViewController" customModule="Project_D_06_21" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uQK-OQ-6Fg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="nyO-d7-4eI">
+                                <rect key="frame" x="197" y="448" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GLg-Pk-cgG">
+                                <rect key="frame" x="40" y="84" width="334" height="334"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="334" id="3gJ-gA-ffp"/>
+                                    <constraint firstAttribute="width" constant="334" id="Rj4-b7-yjQ"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Дайте нам ещё минуту, чтобы всё настроить и наладить" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ii-A2-2gW">
+                                <rect key="frame" x="40" y="498" width="334" height="49"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="21"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="rVa-3h-ZDP"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7ii-A2-2gW" firstAttribute="width" secondItem="GLg-Pk-cgG" secondAttribute="width" id="1Lg-ov-1dV"/>
+                            <constraint firstItem="rVa-3h-ZDP" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="7ii-A2-2gW" secondAttribute="bottom" constant="20" id="7tu-30-Yb3"/>
+                            <constraint firstItem="nyO-d7-4eI" firstAttribute="top" secondItem="GLg-Pk-cgG" secondAttribute="bottom" constant="30" id="DCz-we-cTU"/>
+                            <constraint firstItem="7ii-A2-2gW" firstAttribute="centerX" secondItem="rVa-3h-ZDP" secondAttribute="centerX" id="Hdg-2L-6Ls"/>
+                            <constraint firstItem="GLg-Pk-cgG" firstAttribute="top" secondItem="rVa-3h-ZDP" secondAttribute="top" constant="40" id="NUM-oR-Wep"/>
+                            <constraint firstItem="rVa-3h-ZDP" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="GLg-Pk-cgG" secondAttribute="trailing" constant="40" id="Pka-H0-JAa"/>
+                            <constraint firstItem="GLg-Pk-cgG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="rVa-3h-ZDP" secondAttribute="leading" constant="40" id="Tpg-eK-SrX"/>
+                            <constraint firstItem="nyO-d7-4eI" firstAttribute="centerX" secondItem="rVa-3h-ZDP" secondAttribute="centerX" id="aHN-BI-gD1"/>
+                            <constraint firstItem="7ii-A2-2gW" firstAttribute="top" secondItem="nyO-d7-4eI" secondAttribute="bottom" constant="30" id="hIu-vs-xd8"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="activity" destination="nyO-d7-4eI" id="ipW-52-Glc"/>
+                        <outlet property="logoImg" destination="GLg-Pk-cgG" id="RMn-MZ-lDY"/>
+                        <segue destination="y9P-7G-A7G" kind="presentation" identifier="mainPage" modalPresentationStyle="fullScreen" id="hCY-GA-DUX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FFS-2d-6Wv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1507" y="514"/>
         </scene>
     </scenes>
     <resources>
