@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B229C65427B6927F005ED852 /* IngredientsDetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B229C65327B6927F005ED852 /* IngredientsDetailViewCell.swift */; };
 		B24B92A826792DF30077D8C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24B92A726792DF30077D8C8 /* AppDelegate.swift */; };
 		B24B92AA26792DF30077D8C8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24B92A926792DF30077D8C8 /* SceneDelegate.swift */; };
 		B24B92AC26792DF30077D8C8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24B92AB26792DF30077D8C8 /* ViewController.swift */; };
@@ -16,16 +17,18 @@
 		B24B92B726792DF70077D8C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B24B92B526792DF70077D8C8 /* LaunchScreen.storyboard */; };
 		B24B92C52679300F0077D8C8 /* IngredientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24B92C42679300F0077D8C8 /* IngredientsViewController.swift */; };
 		B24B92C8267930450077D8C8 /* RecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24B92C7267930450077D8C8 /* RecipesViewController.swift */; };
-		B24B92CB267930590077D8C8 /* RecipeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24B92CA267930590077D8C8 /* RecipeDetailViewController.swift */; };
+		B24B92CB267930590077D8C8 /* PreRecipeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24B92CA267930590077D8C8 /* PreRecipeDetailViewController.swift */; };
 		B24B92D4267B93AD0077D8C8 /* recipes_1.plist in Resources */ = {isa = PBXBuildFile; fileRef = B24B92D3267B93A40077D8C8 /* recipes_1.plist */; };
 		B26D35262680DF4A002E8F5D /* CategoryIngridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26D35252680DF4A002E8F5D /* CategoryIngridViewController.swift */; };
 		B26D35292680E40E002E8F5D /* AddIngridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26D35282680E40E002E8F5D /* AddIngridViewController.swift */; };
 		B26D353F2681F5AD002E8F5D /* normalIngrid.plist in Resources */ = {isa = PBXBuildFile; fileRef = B26D353E2681F5AD002E8F5D /* normalIngrid.plist */; };
 		B26D354526823E10002E8F5D /* allIngrid.plist in Resources */ = {isa = PBXBuildFile; fileRef = B26D354426823E0F002E8F5D /* allIngrid.plist */; };
+		B294AF4427E381DD00117622 /* RecipeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B294AF4327E381DD00117622 /* RecipeDetailViewController.swift */; };
 		B2A89CB92698B85E00BFBECD /* AddIngridTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A89CB82698B85E00BFBECD /* AddIngridTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B229C65327B6927F005ED852 /* IngredientsDetailViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsDetailViewCell.swift; sourceTree = "<group>"; };
 		B24B92A426792DF30077D8C8 /* Project_D_06_21.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project_D_06_21.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24B92A726792DF30077D8C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B24B92A926792DF30077D8C8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -39,7 +42,7 @@
 		B24B92C026792F910077D8C8 /* Recipe+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recipe+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B24B92C42679300F0077D8C8 /* IngredientsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsViewController.swift; sourceTree = "<group>"; };
 		B24B92C7267930450077D8C8 /* RecipesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesViewController.swift; sourceTree = "<group>"; };
-		B24B92CA267930590077D8C8 /* RecipeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailViewController.swift; sourceTree = "<group>"; };
+		B24B92CA267930590077D8C8 /* PreRecipeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreRecipeDetailViewController.swift; sourceTree = "<group>"; };
 		B24B92D3267B93A40077D8C8 /* recipes_1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = recipes_1.plist; sourceTree = "<group>"; };
 		B26D35252680DF4A002E8F5D /* CategoryIngridViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryIngridViewController.swift; sourceTree = "<group>"; };
 		B26D35282680E40E002E8F5D /* AddIngridViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngridViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +52,7 @@
 		B26D354126823C97002E8F5D /* MainIngridient+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainIngridient+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B26D354226823C97002E8F5D /* MainIngridient+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainIngridient+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B26D354426823E0F002E8F5D /* allIngrid.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = allIngrid.plist; sourceTree = "<group>"; };
+		B294AF4327E381DD00117622 /* RecipeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailViewController.swift; sourceTree = "<group>"; };
 		B2A89CB82698B85E00BFBECD /* AddIngridTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngridTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,10 +105,12 @@
 				B24B92B026792DF30077D8C8 /* Project_D_06_21.xcdatamodeld */,
 				B24B92C42679300F0077D8C8 /* IngredientsViewController.swift */,
 				B24B92C7267930450077D8C8 /* RecipesViewController.swift */,
-				B24B92CA267930590077D8C8 /* RecipeDetailViewController.swift */,
+				B24B92CA267930590077D8C8 /* PreRecipeDetailViewController.swift */,
 				B26D35252680DF4A002E8F5D /* CategoryIngridViewController.swift */,
 				B26D35282680E40E002E8F5D /* AddIngridViewController.swift */,
 				B2A89CB82698B85E00BFBECD /* AddIngridTableViewCell.swift */,
+				B229C65327B6927F005ED852 /* IngredientsDetailViewCell.swift */,
+				B294AF4327E381DD00117622 /* RecipeDetailViewController.swift */,
 			);
 			path = Project_D_06_21;
 			sourceTree = "<group>";
@@ -183,7 +189,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B24B92C8267930450077D8C8 /* RecipesViewController.swift in Sources */,
-				B24B92CB267930590077D8C8 /* RecipeDetailViewController.swift in Sources */,
+				B24B92CB267930590077D8C8 /* PreRecipeDetailViewController.swift in Sources */,
+				B229C65427B6927F005ED852 /* IngredientsDetailViewCell.swift in Sources */,
 				B24B92AC26792DF30077D8C8 /* ViewController.swift in Sources */,
 				B26D35262680DF4A002E8F5D /* CategoryIngridViewController.swift in Sources */,
 				B24B92B226792DF30077D8C8 /* Project_D_06_21.xcdatamodeld in Sources */,
@@ -191,6 +198,7 @@
 				B24B92A826792DF30077D8C8 /* AppDelegate.swift in Sources */,
 				B24B92AA26792DF30077D8C8 /* SceneDelegate.swift in Sources */,
 				B2A89CB92698B85E00BFBECD /* AddIngridTableViewCell.swift in Sources */,
+				B294AF4427E381DD00117622 /* RecipeDetailViewController.swift in Sources */,
 				B26D35292680E40E002E8F5D /* AddIngridViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -348,7 +356,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "space.Project-D-06-21";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -367,7 +375,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "space.Project-D-06-21";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

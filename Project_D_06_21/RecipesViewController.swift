@@ -20,10 +20,9 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
     var allIngrids: [MainIngridient] = []
 
     private func uploadIngridMatch() {
-        let recipeFetchRequest: NSFetchRequest<Recipe>  = Recipe.fetchRequest()
+        let recipeFetchRequest: NSFetchRequest<Recipe> = Recipe.fetchRequest()
         do {
             recipes = try context.fetch(recipeFetchRequest)
-
         } catch {
             print(error.localizedDescription)
         }
@@ -46,6 +45,7 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
         for ingrid in curIngridients {
             curIngridientsIndex.append(contentsOf: ingrid.index!.components(separatedBy: ";").map{ Int($0) ?? Int(-1)})
         }
+        print(curIngridientsIndex)
         
             // print(recipes)
         for recipe in recipes {
@@ -79,12 +79,10 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
         }
         self.recipesTable.reloadData()
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
-    
-    
     
     // MARK: - TABLE VIEW CELL
     
@@ -102,8 +100,9 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
         if segue.identifier == "recipeDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let dvc = segue.destination as! RecipeDetailViewController
-                dvc.recipeName = "Коэффициент совпадения: \(self.recipes[indexPath.row].ingridMatch)"
-                dvc.recipeImg = self.recipes[indexPath.row].img!
+                dvc.recipeItem = self.recipes[indexPath.row]
+                dvc.arrayOfUserIngridients = curIngridientsIndex
+                
             }
         }
     }

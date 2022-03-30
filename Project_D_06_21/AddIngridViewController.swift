@@ -10,6 +10,8 @@ import CoreData
 
 
 
+
+
 class AddIngridViewController: UITableViewController{
  
     @IBOutlet var table: UITableView!
@@ -79,6 +81,9 @@ class AddIngridViewController: UITableViewController{
         print(allIngridients[normalIndex].added)
         // let ingrid = Ingridient(context: context)
         // ingrid.added = true
+        if let message = self.allIngridients[normalIndex].name {
+            self.showToast(message: message + " добавлен", font: .systemFont(ofSize: 12.0))
+        }
         do {
             try context.save()
         } catch let error as NSError {
@@ -88,4 +93,26 @@ class AddIngridViewController: UITableViewController{
     }
 
 }
+
+extension AddIngridViewController {
+
+func showToast(message : String, font: UIFont) {
+
+    let toastLabel = UILabel(frame: CGRect(x: 20, y: self.view.frame.size.height-270, width: self.view.frame.size.width - 40, height: 35))
+    toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+    toastLabel.textColor = UIColor.white
+    toastLabel.font = font
+    toastLabel.textAlignment = .center;
+    toastLabel.text = message
+    toastLabel.alpha = 1.0
+    toastLabel.layer.cornerRadius = 10;
+    toastLabel.clipsToBounds  =  true
+    self.view.addSubview(toastLabel)
+    UIView.animate(withDuration: 6.0, delay: 0.1, options: .curveEaseOut, animations: {
+         toastLabel.alpha = 0.0
+    }, completion: {(isCompleted) in
+        toastLabel.removeFromSuperview()
+    })
+} }
+
  
