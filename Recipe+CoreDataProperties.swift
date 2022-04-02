@@ -2,7 +2,7 @@
 //  Recipe+CoreDataProperties.swift
 //  Project_D_06_21
 //
-//  Created by Влад Комсомоленко on 21.09.2021.
+//  Created by Владислав Комсомоленко on 30.03.2022.
 //
 //
 
@@ -21,9 +21,10 @@ extension Recipe {
     @NSManaged public var img: String?
     @NSManaged public var ingredients: String?
     @NSManaged public var ingridCount: Int16
+    @NSManaged public var ingridIndex: NSObject?
     @NSManaged public var ingridMatch: Double
     @NSManaged public var name: String?
     @NSManaged public var steps: String?
-    @NSManaged public var ingridIndex: NSObject?
+    @NSManaged public var isFavourite: Bool
 
 }

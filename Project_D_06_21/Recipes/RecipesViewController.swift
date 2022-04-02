@@ -12,6 +12,7 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
     lazy var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     @IBOutlet var recipesTable: UITableView!
+    
     var fetchedResultsController: NSFetchedResultsController<Ingridient>!
     var recipeFetchedResultsController: NSFetchedResultsController<Ingridient>!
     var curIngridientsIndex: [Int] = []
@@ -82,6 +83,7 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        recipesTable.reloadData()
     }
     
     // MARK: - TABLE VIEW CELL
@@ -91,11 +93,20 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath)
-        
-        cell.textLabel?.text = recipes[indexPath.row].name
-        return cell
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "RecipesTableViewCell") as? RecipesTableViewCell {
+            
+            let image = UIImage(named: recipes[indexPath.row].img ?? "noPhoto.jpg") ?? UIImage(named: "noPhoto.jpg")!
+            cell.recipeImg.image = image
+            cell.recipeName.text = recipes[indexPath.row].name
+            let matchedIngrids = Int(recipes[indexPath.row].ingridMatch * Double(recipes[indexPath.row].ingridCount))
+            cell.ingridMatchLabel.text = "\(matchedIngrids)/\(recipes[indexPath.row].ingridCount)"
+    
+            return cell
+        }
+        return UITableViewCell()
     }
+
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "recipeDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {

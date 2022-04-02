@@ -8,6 +8,7 @@
 import UIKit
 
 class RecipeDetailViewController: UIViewController {
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     var recipeItem: Recipe = Recipe()
     let defaultImg: String = "noPhoto"
@@ -28,30 +29,47 @@ class RecipeDetailViewController: UIViewController {
     
 
     @IBAction func addToFavouritesTapped(_ sender: Any) {
-        print(addToFavouritesButton.state)
-        if addToFavouritesButton.isSelected {
-            addToFavouritesButton.tintColor = UIColor.brown
-        } else {
+        if recipeItem.isFavourite {
             addToFavouritesButton.tintColor = UIColor.systemBlue
+            self.recipeItem.isFavourite = !self.recipeItem.isFavourite
+        } else {
+            addToFavouritesButton.tintColor = UIColor.brown
+            self.recipeItem.isFavourite = !self.recipeItem.isFavourite
+        }
+        
+        do {
+            try self.context.save()
+        } catch let error as NSError {
+            print("no save: \(error)")
         }
         addToFavouritesButton.isSelected = !addToFavouritesButton.isSelected
-//        print(addToFavouritesButton.isSelected)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addToFavouritesButton.setTitle("Убрать из избранного", for: .normal)
         addToFavouritesButton.setTitle("Добавить в избранное", for: .selected)
-        addToFavouritesButton.isSelected = true
+        addToFavouritesButton.isSelected = !recipeItem.isFavourite
+        
+        if recipeItem.isFavourite {
+            addToFavouritesButton.tintColor = UIColor.brown
+        } else {
+            addToFavouritesButton.tintColor = UIColor.systemBlue
+        }
+        
         var recipeDetailText = ""
         let steps = recipeItem.steps ?? ""
         let arrayOfSteps = steps.components(separatedBy: "$%$")
         print(arrayOfSteps)
-        for i in 0...arrayOfSteps.count-1 {
-            print(i)
-            recipeDetailText += "\(i+1). \(arrayOfSteps[i])"
-            if i != arrayOfSteps.count-1 {
-                recipeDetailText += "\n\n"
+        if arrayOfSteps.count == 1 {
+            recipeDetailText += "    \(arrayOfSteps[0])"
+        } else {
+            for i in 0...arrayOfSteps.count-1 {
+                print(i)
+                recipeDetailText += "\(i+1). \(arrayOfSteps[i])"
+                if i != arrayOfSteps.count-1 {
+                    recipeDetailText += "\n\n"
+                }
             }
         }
         let ingredients = recipeItem.ingredients ?? ""
