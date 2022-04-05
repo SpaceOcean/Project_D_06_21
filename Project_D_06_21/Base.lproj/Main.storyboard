@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7Qe-yV-Imv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7Qe-yV-Imv">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -192,7 +193,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bpX-Wp-Shi">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="798"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O13-rO-Yg6">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="830.5"/>
@@ -538,23 +539,56 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="IngridientCell" id="Mzc-5i-uGU" customClass="AddIngridTableViewCell" customModule="Project_D_06_21" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="37"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Mzc-5i-uGU" id="Rng-vY-puF">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="37"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E7X-jY-G4D">
-                                            <rect key="frame" x="378" y="11.5" width="21" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ph-pt-3x5">
+                                            <rect key="frame" x="16" y="8" width="313" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="asP-FH-CwU">
+                                            <rect key="frame" x="368" y="3.5" width="30" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="asP-FH-CwU" secondAttribute="height" multiplier="1:1" id="GVV-gx-qjJ"/>
+                                                <constraint firstAttribute="height" constant="30" id="j09-xY-pGE"/>
+                                            </constraints>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <state key="normal">
+                                                <imageReference key="image" image="plus.circle" catalog="system" symbolScale="large"/>
+                                            </state>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OcD-l6-mD6">
+                                            <rect key="frame" x="337" y="3.5" width="30" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="mtq-8d-Wbe"/>
+                                                <constraint firstAttribute="width" secondItem="OcD-l6-mD6" secondAttribute="height" multiplier="1:1" id="wNu-RO-CY0"/>
+                                            </constraints>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <state key="normal">
+                                                <imageReference key="image" image="info.circle" catalog="system" symbolScale="large"/>
+                                            </state>
                                         </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="E7X-jY-G4D" firstAttribute="centerY" secondItem="Rng-vY-puF" secondAttribute="centerY" id="9Vj-Yd-3Zd"/>
-                                        <constraint firstAttribute="trailing" secondItem="E7X-jY-G4D" secondAttribute="trailing" constant="15" id="LyO-4v-16J"/>
+                                        <constraint firstItem="asP-FH-CwU" firstAttribute="centerY" secondItem="Rng-vY-puF" secondAttribute="centerY" id="39p-Be-3Ct"/>
+                                        <constraint firstAttribute="bottom" secondItem="7ph-pt-3x5" secondAttribute="bottom" constant="8" id="85x-76-AbD"/>
+                                        <constraint firstItem="OcD-l6-mD6" firstAttribute="leading" secondItem="7ph-pt-3x5" secondAttribute="trailing" constant="8" id="PaQ-38-rM5"/>
+                                        <constraint firstAttribute="trailing" secondItem="asP-FH-CwU" secondAttribute="trailing" constant="16" id="ex7-oD-dt5"/>
+                                        <constraint firstItem="7ph-pt-3x5" firstAttribute="top" secondItem="Rng-vY-puF" secondAttribute="top" constant="8" id="iRn-7G-agT"/>
+                                        <constraint firstItem="OcD-l6-mD6" firstAttribute="centerY" secondItem="Rng-vY-puF" secondAttribute="centerY" id="p3H-RO-iff"/>
+                                        <constraint firstItem="asP-FH-CwU" firstAttribute="leading" secondItem="OcD-l6-mD6" secondAttribute="trailing" constant="1" id="qEW-eH-pZp"/>
+                                        <constraint firstItem="7ph-pt-3x5" firstAttribute="leading" secondItem="Rng-vY-puF" secondAttribute="leading" constant="16" id="sKK-TF-myB"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="addIngridButton" destination="E7X-jY-G4D" id="bHi-fM-RTU"/>
+                                    <outlet property="addIngridButton" destination="asP-FH-CwU" id="9VZ-0c-ty3"/>
+                                    <outlet property="addIngridInfoButton" destination="OcD-l6-mD6" id="CzE-uc-JJx"/>
+                                    <outlet property="addIngrigNameLabel" destination="7ph-pt-3x5" id="OPb-za-u1z"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -624,8 +658,10 @@
     </scenes>
     <resources>
         <image name="house" catalog="system" width="128" height="106"/>
+        <image name="info.circle" catalog="system" width="128" height="121"/>
         <image name="newspaper" catalog="system" width="128" height="111"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="plus.circle" catalog="system" width="128" height="121"/>
         <image name="slider.horizontal.3" catalog="system" width="128" height="100"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

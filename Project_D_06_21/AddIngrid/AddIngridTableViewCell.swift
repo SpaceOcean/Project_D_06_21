@@ -10,6 +10,8 @@ import UIKit
 class AddIngridTableViewCell: UITableViewCell {
 
 
+    @IBOutlet weak var addIngrigNameLabel: UILabel!
+    @IBOutlet weak var addIngridInfoButton: UIButton!
     @IBOutlet weak var addIngridButton: UIButton!
     
     override func awakeFromNib() {
