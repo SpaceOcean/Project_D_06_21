@@ -2,7 +2,7 @@
 //  MainIngridient+CoreDataProperties.swift
 //  Project_D_06_21
 //
-//  Created by Влад Комсомоленко on 22.06.2021.
+//  Created by Владислав Комсомоленко on 05.04.2022.
 //
 //
 
@@ -16,7 +16,8 @@ extension MainIngridient {
         return NSFetchRequest<MainIngridient>(entityName: "MainIngridient")
     }
 
-    @NSManaged public var name: String?
     @NSManaged public var index: Int32
+    @NSManaged public var name: String?
+    @NSManaged public var weight: Bool
 
 }

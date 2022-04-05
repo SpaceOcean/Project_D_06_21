@@ -62,6 +62,7 @@ class ViewController: UIViewController {
             ingrid.index = ingridDictionary["index"] as? String
             ingrid.category = ingridDictionary["category"] as! Int32
             ingrid.added = false
+            ingrid.weight = Double(1)
         }
     }
     

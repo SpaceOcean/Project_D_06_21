@@ -2,7 +2,7 @@
 //  Ingridient+CoreDataClass.swift
 //  Project_D_06_21
 //
-//  Created by Влад Комсомоленко on 21.06.2021.
+//  Created by Владислав Комсомоленко on 05.04.2022.
 //
 //
 

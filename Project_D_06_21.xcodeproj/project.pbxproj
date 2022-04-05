@@ -46,12 +46,12 @@
 		B24B92D3267B93A40077D8C8 /* recipes_1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = recipes_1.plist; sourceTree = "<group>"; };
 		B26D35252680DF4A002E8F5D /* CategoryIngridViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryIngridViewController.swift; sourceTree = "<group>"; };
 		B26D35282680E40E002E8F5D /* AddIngridViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngridViewController.swift; sourceTree = "<group>"; };
-		B26D352B2680FCF2002E8F5D /* Ingridient+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ingridient+CoreDataClass.swift"; sourceTree = "<group>"; };
-		B26D352C2680FCF2002E8F5D /* Ingridient+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ingridient+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B26D353E2681F5AD002E8F5D /* normalIngrid.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = normalIngrid.plist; sourceTree = "<group>"; };
-		B26D354126823C97002E8F5D /* MainIngridient+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainIngridient+CoreDataClass.swift"; sourceTree = "<group>"; };
-		B26D354226823C97002E8F5D /* MainIngridient+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainIngridient+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B26D354426823E0F002E8F5D /* allIngrid.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = allIngrid.plist; sourceTree = "<group>"; };
+		B28DDBC527FCC7DD00689688 /* MainIngridient+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainIngridient+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B28DDBC627FCC7DD00689688 /* MainIngridient+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainIngridient+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B28DDBC727FCC7DD00689688 /* Ingridient+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ingridient+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B28DDBC827FCC7DD00689688 /* Ingridient+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ingridient+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B294AF4327E381DD00117622 /* RecipeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailViewController.swift; sourceTree = "<group>"; };
 		B2A89CB82698B85E00BFBECD /* AddIngridTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngridTableViewCell.swift; sourceTree = "<group>"; };
 		B2CD03CB27F4F4BD00B1CA15 /* Recipe+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recipe+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -82,12 +82,12 @@
 		B24B929B26792DF30077D8C8 = {
 			isa = PBXGroup;
 			children = (
+				B28DDBC527FCC7DD00689688 /* MainIngridient+CoreDataClass.swift */,
+				B28DDBC627FCC7DD00689688 /* MainIngridient+CoreDataProperties.swift */,
+				B28DDBC727FCC7DD00689688 /* Ingridient+CoreDataClass.swift */,
+				B28DDBC827FCC7DD00689688 /* Ingridient+CoreDataProperties.swift */,
 				B2CD03CB27F4F4BD00B1CA15 /* Recipe+CoreDataClass.swift */,
 				B2CD03CC27F4F4BD00B1CA15 /* Recipe+CoreDataProperties.swift */,
-				B26D354126823C97002E8F5D /* MainIngridient+CoreDataClass.swift */,
-				B26D354226823C97002E8F5D /* MainIngridient+CoreDataProperties.swift */,
-				B26D352B2680FCF2002E8F5D /* Ingridient+CoreDataClass.swift */,
-				B26D352C2680FCF2002E8F5D /* Ingridient+CoreDataProperties.swift */,
 				B24B92A626792DF30077D8C8 /* Project_D_06_21 */,
 				B24B92A526792DF30077D8C8 /* Products */,
 			);
