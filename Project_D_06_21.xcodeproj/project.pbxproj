@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B229C65427B6927F005ED852 /* IngredientsDetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B229C65327B6927F005ED852 /* IngredientsDetailViewCell.swift */; };
+		B23D311127FCB40E00AA3E03 /* ModifyIngridientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23D311027FCB40E00AA3E03 /* ModifyIngridientViewController.swift */; };
 		B24B92A826792DF30077D8C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24B92A726792DF30077D8C8 /* AppDelegate.swift */; };
 		B24B92AA26792DF30077D8C8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24B92A926792DF30077D8C8 /* SceneDelegate.swift */; };
 		B24B92AC26792DF30077D8C8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24B92AB26792DF30077D8C8 /* ViewController.swift */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		B229C65327B6927F005ED852 /* IngredientsDetailViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsDetailViewCell.swift; sourceTree = "<group>"; };
+		B23D311027FCB40E00AA3E03 /* ModifyIngridientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyIngridientViewController.swift; sourceTree = "<group>"; };
 		B24B92A426792DF30077D8C8 /* Project_D_06_21.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project_D_06_21.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24B92A726792DF30077D8C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B24B92A926792DF30077D8C8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +71,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B23D311227FCB41C00AA3E03 /* ModifyIngridient */ = {
+			isa = PBXGroup;
+			children = (
+				B23D311027FCB40E00AA3E03 /* ModifyIngridientViewController.swift */,
+			);
+			path = ModifyIngridient;
+			sourceTree = "<group>";
+		};
 		B24B929B26792DF30077D8C8 = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +120,7 @@
 				B2CD03D827F788F900B1CA15 /* Ingredients */,
 				B2CD03D527F7884300B1CA15 /* Recipes */,
 				B2CD03D727F788CE00B1CA15 /* RecipeDetail */,
+				B23D311227FCB41C00AA3E03 /* ModifyIngridient */,
 			);
 			path = Project_D_06_21;
 			sourceTree = "<group>";
@@ -232,6 +243,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B24B92C8267930450077D8C8 /* RecipesViewController.swift in Sources */,
+				B23D311127FCB40E00AA3E03 /* ModifyIngridientViewController.swift in Sources */,
 				B229C65427B6927F005ED852 /* IngredientsDetailViewCell.swift in Sources */,
 				B24B92AC26792DF30077D8C8 /* ViewController.swift in Sources */,
 				B26D35262680DF4A002E8F5D /* CategoryIngridViewController.swift in Sources */,
