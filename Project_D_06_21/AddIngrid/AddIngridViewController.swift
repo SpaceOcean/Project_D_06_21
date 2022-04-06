@@ -12,12 +12,15 @@ import CoreData
 
 
 
-class AddIngridViewController: UITableViewController{
+class AddIngridViewController: UITableViewController, AddIngridCellDelegator {
     
     @IBOutlet var table: UITableView!
     var ingridients: [Ingridient] = []
     var allIngridients: [Ingridient] = []
     var category: Int = 0
+    
+    var infoIngridItem: Ingridient = Ingridient()
+    
     lazy var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,6 +68,11 @@ class AddIngridViewController: UITableViewController{
         cell.addIngrigNameLabel.text = ingridients[indexPath.row].name
         cell.addIngridButton.tag = indexPath.row
         cell.addIngridButton.addTarget(self, action: #selector(addButtonTapped(sender:)), for: .touchUpInside)
+        
+        cell.addIngridButton.tag = indexPath.row
+        
+        cell.delegate = self
+        
         return cell
     }
 
@@ -103,6 +111,29 @@ class AddIngridViewController: UITableViewController{
         // myIngridTable.reloadData()
     }
 
+    
+    func callSegueFromCell(myData ingridID: UIButton) {
+      //try not to send self, just to avoid retain cycles(depends on how you handle the code on the next controller)
+        
+
+        
+        self.performSegue(withIdentifier: "Modify", sender: ingridID )
+
+        
+    }
+    
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Modify" {
+            let ingridButton = sender!
+            let ingridID = (ingridButton as! UIButton).tag
+            let dvc = segue.destination as! ModifyIngridientViewController
+            dvc.ingridItem = ingridients[ingridID]
+        }
+    }
+    
+    
 }
 
 extension AddIngridViewController {
@@ -124,6 +155,8 @@ extension AddIngridViewController {
     }, completion: {(isCompleted) in
         toastLabel.removeFromSuperview()
     })
-} }
+    }
+    
+}
 
  

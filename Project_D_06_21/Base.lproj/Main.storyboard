@@ -34,6 +34,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Ингредиенты" id="F3o-Dj-6AH">
+                        <barButtonItem key="backBarButtonItem" title=" " id="D0M-qe-Zn9"/>
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="add" id="yl4-HV-9RW">
                             <connections>
                                 <action selector="addInrid:" destination="IBM-Ff-x5f" id="aaH-4R-eyC"/>
@@ -151,6 +152,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Рецепты" id="c2c-P9-FK3">
+                        <barButtonItem key="backBarButtonItem" title=" " id="Jok-Td-L8z"/>
                         <rightBarButtonItems>
                             <barButtonItem title="Item" image="slider.horizontal.3" catalog="system" id="OZ1-IV-nES"/>
                             <barButtonItem title="Item" image="plus" catalog="system" id="ztV-XR-PFO">
@@ -182,7 +184,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BjD-eE-LDF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2574" y="913"/>
+            <point key="canvasLocation" x="2754" y="913"/>
         </scene>
         <!--Recipe Detail View Controller-->
         <scene sceneID="aAD-sN-s9S">
@@ -523,7 +525,9 @@
                             <outlet property="delegate" destination="ejF-qP-Trc" id="pLK-pJ-nSi"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Категории" id="dG1-hQ-LwU"/>
+                    <navigationItem key="navigationItem" title="Категории" id="dG1-hQ-LwU">
+                        <barButtonItem key="backBarButtonItem" title=" " id="Pav-Ad-XCi"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M5b-MB-m4H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -573,6 +577,7 @@
                                                 <imageReference key="image" image="info.circle" catalog="system" symbolScale="large"/>
                                             </state>
                                             <connections>
+                                                <action selector="infoButtonTapped:" destination="Mzc-5i-uGU" eventType="touchUpInside" id="3wm-g6-P2h"/>
                                                 <segue destination="Ufd-Ha-GqJ" kind="showDetail" identifier="Modify" id="oo9-bT-9fi"/>
                                             </connections>
                                         </button>
@@ -600,7 +605,9 @@
                             <outlet property="delegate" destination="KLN-ui-d21" id="dhh-zW-Ujm"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Добавление ингредиентов" largeTitleDisplayMode="never" id="eIB-f6-lwE"/>
+                    <navigationItem key="navigationItem" title="Добавление ингредиентов" largeTitleDisplayMode="never" id="eIB-f6-lwE">
+                        <barButtonItem key="backBarButtonItem" title=" " id="2IR-DU-rxl"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="table" destination="yPt-CK-JTK" id="fdN-pW-bcx"/>
                     </connections>
@@ -636,12 +643,15 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="2" translatesAutoresizingMaskIntoConstraints="NO" id="uxW-SZ-VHO">
-                                <rect key="frame" x="30" y="352.5" width="354" height="31"/>
+                                <rect key="frame" x="30" y="337.5" width="354" height="31"/>
                                 <color key="minimumTrackTintColor" systemColor="systemGreenColor"/>
                                 <color key="maximumTrackTintColor" systemColor="systemRedColor"/>
+                                <connections>
+                                    <action selector="sliderWeightChanged:" destination="Ufd-Ha-GqJ" eventType="valueChanged" id="eNz-ZQ-ZHa"/>
+                                </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="😍" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wkp-nt-Azv">
-                                <rect key="frame" x="340" y="277.5" width="42" height="45"/>
+                                <rect key="frame" x="340" y="262.5" width="42" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Wkp-nt-Azv" secondAttribute="height" multiplier="15:16" id="440-QA-828"/>
                                     <constraint firstAttribute="height" constant="45" id="pHF-iU-Yah"/>
@@ -651,7 +661,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🤢" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H5I-vE-hf2">
-                                <rect key="frame" x="32" y="277.5" width="42" height="45"/>
+                                <rect key="frame" x="32" y="262.5" width="42" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="9gp-bO-akm"/>
                                     <constraint firstAttribute="width" secondItem="H5I-vE-hf2" secondAttribute="height" multiplier="15:16" id="vFu-Ss-soc"/>
@@ -661,21 +671,24 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Не переношу" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="miU-SV-bCt">
-                                <rect key="frame" x="16" y="397.5" width="107" height="20.5"/>
+                                <rect key="frame" x="16" y="382.5" width="107" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Обожаю" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mgt-Br-Xke">
-                                <rect key="frame" x="331" y="397.5" width="67" height="20.5"/>
+                                <rect key="frame" x="331" y="382.5" width="67" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aMb-D2-WwY">
-                                <rect key="frame" x="40" y="478" width="334" height="31"/>
+                                <rect key="frame" x="40" y="463" width="334" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Указать значимость"/>
+                                <connections>
+                                    <action selector="saveNewWeight:" destination="Ufd-Ha-GqJ" eventType="touchUpInside" id="zQK-TI-JCX"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="HG1-je-HmI"/>
@@ -693,7 +706,7 @@
                             <constraint firstItem="aMb-D2-WwY" firstAttribute="top" secondItem="miU-SV-bCt" secondAttribute="bottom" constant="60" id="L8o-Il-gna"/>
                             <constraint firstItem="H5I-vE-hf2" firstAttribute="leading" secondItem="HG1-je-HmI" secondAttribute="leading" constant="32" id="LGj-mQ-iNG"/>
                             <constraint firstItem="KS9-8q-x0u" firstAttribute="top" secondItem="Xgm-kQ-X0e" secondAttribute="bottom" constant="32" id="Taj-yh-MNG"/>
-                            <constraint firstItem="Wkp-nt-Azv" firstAttribute="top" secondItem="8Ur-De-1M7" secondAttribute="bottom" constant="80" id="WjS-fh-kfF"/>
+                            <constraint firstItem="Wkp-nt-Azv" firstAttribute="top" secondItem="8Ur-De-1M7" secondAttribute="bottom" constant="65" id="WjS-fh-kfF"/>
                             <constraint firstItem="HG1-je-HmI" firstAttribute="trailing" secondItem="8Ur-De-1M7" secondAttribute="trailing" constant="16" id="XkL-QL-gq7"/>
                             <constraint firstItem="HG1-je-HmI" firstAttribute="trailing" secondItem="uxW-SZ-VHO" secondAttribute="trailing" constant="32" id="ZUr-HV-daB"/>
                             <constraint firstItem="HG1-je-HmI" firstAttribute="trailing" secondItem="KS9-8q-x0u" secondAttribute="trailing" constant="16" id="aFA-eu-fX0"/>
@@ -704,9 +717,13 @@
                             <constraint firstItem="HG1-je-HmI" firstAttribute="trailing" secondItem="Xgm-kQ-X0e" secondAttribute="trailing" constant="16" id="iS1-10-Tfm"/>
                             <constraint firstItem="aMb-D2-WwY" firstAttribute="leading" secondItem="HG1-je-HmI" secondAttribute="leading" constant="40" id="lho-B8-CLn"/>
                             <constraint firstItem="Xgm-kQ-X0e" firstAttribute="top" secondItem="HG1-je-HmI" secondAttribute="top" constant="16" id="mxV-lH-V1Y"/>
-                            <constraint firstItem="H5I-vE-hf2" firstAttribute="top" secondItem="8Ur-De-1M7" secondAttribute="bottom" constant="80" id="uMf-Wd-mIO"/>
+                            <constraint firstItem="H5I-vE-hf2" firstAttribute="top" secondItem="8Ur-De-1M7" secondAttribute="bottom" constant="65" id="uMf-Wd-mIO"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="nameIngrid" destination="KS9-8q-x0u" id="AEB-Wi-Fmy"/>
+                        <outlet property="sliderWeight" destination="uxW-SZ-VHO" id="QUW-pc-g7W"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oyA-qT-tmM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
