@@ -17,7 +17,7 @@ class RecipesTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.ingridMatchView.backgroundColor = UIColor.yellow.withAlphaComponent(0.9)
+        
         self.ingridMatchView.layer.cornerRadius = 12
         self.ingridMatchView.layer.borderWidth = 1.0
         self.ingridMatchView.layer.borderColor = UIColor.black.cgColor

@@ -100,7 +100,14 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
             cell.recipeName.text = recipes[indexPath.row].name
             let matchedIngrids = Int(recipes[indexPath.row].ingridMatch * Double(recipes[indexPath.row].ingridCount))
             cell.ingridMatchLabel.text = "\(matchedIngrids)/\(recipes[indexPath.row].ingridCount)"
-    
+            if recipes[indexPath.row].ingridCount == matchedIngrids {
+                cell.ingridMatchView.backgroundColor = UIColor.green.withAlphaComponent(0.85)
+            } else if matchedIngrids == 0 {
+                cell.ingridMatchView.backgroundColor = UIColor(red: 248, green: 0, blue: 0, alpha: 0.75)
+            } else {
+                cell.ingridMatchView.backgroundColor = UIColor.yellow.withAlphaComponent(0.85)
+            }
+            
             return cell
         }
         return UITableViewCell()
