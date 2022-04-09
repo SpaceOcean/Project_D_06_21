@@ -7,8 +7,14 @@
 
 import UIKit
 
+protocol DeleteRowInTableviewDelegate: NSObjectProtocol {
+    func deleteRow(inTableview rowToDelete: Int)
+}
+
 class CategoryIngridViewController: UITableViewController {
     
+    var curIngridientsArray: [Ingridient] = []
+    var delegate: DeleteRowInTableviewDelegate?
     struct Category {
         let name: String
         let img: UIImage
@@ -39,6 +45,8 @@ class CategoryIngridViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        print("delegate")
+        print(delegate)
         // Do any additional setup after loading the view.
     }
     
@@ -65,6 +73,7 @@ class CategoryIngridViewController: UITableViewController {
                 // print("seque")
                 // print(indexPath.row)
                 dvc.category = Int(indexPath.row)
+                dvc.delegate = delegate
             }
         }
     }

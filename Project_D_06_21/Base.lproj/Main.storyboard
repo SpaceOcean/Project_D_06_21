@@ -38,7 +38,7 @@
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="add" id="yl4-HV-9RW">
                             <connections>
                                 <action selector="addInrid:" destination="IBM-Ff-x5f" id="aaH-4R-eyC"/>
-                                <segue destination="ejF-qP-Trc" kind="show" id="VMl-Mb-Nxt"/>
+                                <segue destination="ejF-qP-Trc" kind="show" identifier="showCategory" id="VMl-Mb-Nxt"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

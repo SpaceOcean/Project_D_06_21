@@ -81,8 +81,25 @@ class IngredientsViewController: UITableViewController, NSFetchedResultsControll
     // MARK: - TABLE VIEW CELL
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // print("test")
-        return curIngridients.count
+        
+        let fetchRequest: NSFetchRequest<Ingridient> = Ingridient.fetchRequest()
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        fetchRequest.predicate = NSPredicate(format: "added = true")
+        
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+         fetchedResultsController.delegate = self
+        
+        do {
+            try fetchedResultsController.performFetch()
+            return try context.fetch(fetchRequest).count
+            //curIngridients.sort(by: { $0.name! < $1.name! })
+
+        } catch {
+            return 0
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -97,18 +114,8 @@ class IngredientsViewController: UITableViewController, NSFetchedResultsControll
         let deleteAction = UIContextualAction(style: .normal, title: "Удалить") {
          _, _, _ in
             let curIngridientIndex = indexPath.row
-            let curIngridient = self.curIngridients[curIngridientIndex]
-            let normalIndex = self.allIngridients.firstIndex{$0 === curIngridient}!
-            self.curIngridients.remove(at: curIngridientIndex)
-            self.tableView.deleteRows(at: [indexPath], with: .automatic)
-            print(self.allIngridients[normalIndex].added)
-            self.allIngridients[normalIndex].added = false
-            do {
-                try self.context.save()
-            } catch let error as NSError {
-                print("no save: \(error)")
+            self.deleteRow(inTableview: curIngridientIndex)
             }
-        }
         return deleteAction
     }
     
@@ -120,5 +127,31 @@ class IngredientsViewController: UITableViewController, NSFetchedResultsControll
         
         return swipe
       }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showCategory" {
+            let dvc = segue.destination as! CategoryIngridViewController
+            dvc.curIngridientsArray = curIngridients
+            dvc.delegate = self
+        }
+    }
+}
+
+extension IngredientsViewController: DeleteRowInTableviewDelegate {
+  func deleteRow(inTableview curIngridientIndex: Int) {
+      
+      let indexPath = IndexPath(row: curIngridientIndex, section: 0)
+      let curIngridient = self.curIngridients[curIngridientIndex]
+      let normalIndex = self.allIngridients.firstIndex{$0 === curIngridient}!
+      self.curIngridients.remove(at: curIngridientIndex)
+      self.allIngridients[normalIndex].added = false
+      self.tableView.deleteRows(at: [indexPath], with: .automatic)
+      do {
+          try self.context.save()
+      } catch let error as NSError {
+          print("no save: \(error)")
+      }
+      
+  }
 }
 

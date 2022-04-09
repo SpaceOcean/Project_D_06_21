@@ -40,7 +40,6 @@ class ModifyIngridientViewController: UIViewController {
     }
     
     
-    
     func showToast(message : String, font: UIFont) {
 
         let toastLabel = UILabel(frame: CGRect(x: 20, y: Int(self.view.frame.size.height) - 100, width: Int(self.view.frame.size.width) - 40, height: 35))
