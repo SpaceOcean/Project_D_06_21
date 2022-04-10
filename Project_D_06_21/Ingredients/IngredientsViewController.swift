@@ -15,9 +15,6 @@ class IngredientsViewController: UITableViewController, NSFetchedResultsControll
     var allIngridients: [Ingridient] = []
     var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    
-    
-    
     // MARK: - viewDidLoad
     
     override func viewDidLoad() {
@@ -48,10 +45,7 @@ class IngredientsViewController: UITableViewController, NSFetchedResultsControll
         } catch {
             print(error.localizedDescription)
         }
-        
-        
     }
-    
     
     // MARK: - TABLE VIEW DATA SOURCE (UPDATE TABLE)
     

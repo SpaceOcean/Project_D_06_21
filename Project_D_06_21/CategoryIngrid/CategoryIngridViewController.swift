@@ -23,6 +23,7 @@ class CategoryIngridViewController: UITableViewController {
             self.img = UIImage(named: imageName) ?? UIImage(named: "noPhoto.jpg")!
         }
     }
+    
     let category = [Category(name: "Все ингредиенты", imageName: "allIngredients.jpg"),
                     Category(name: "Мясо", imageName: "meat.jpg"),
                     Category(name: "Птица", imageName: "bird.jpg"),
@@ -39,17 +40,9 @@ class CategoryIngridViewController: UITableViewController {
                     Category(name: "Сладкое", imageName: "dessert.jpg"),
                     Category(name: "Грибы", imageName: "mushrooms.jpg")]
                     
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        print("delegate")
-        print(delegate)
-        // Do any additional setup after loading the view.
     }
-    
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return category.count
@@ -70,14 +63,9 @@ class CategoryIngridViewController: UITableViewController {
         if segue.identifier == "categoryIngrids" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let dvc = segue.destination as! AddIngridViewController
-                // print("seque")
-                // print(indexPath.row)
                 dvc.category = Int(indexPath.row)
                 dvc.delegate = delegate
             }
         }
     }
-
-
-
 }

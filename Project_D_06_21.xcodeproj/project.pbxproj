@@ -23,6 +23,9 @@
 		B26D35292680E40E002E8F5D /* AddIngridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26D35282680E40E002E8F5D /* AddIngridViewController.swift */; };
 		B26D353F2681F5AD002E8F5D /* normalIngrid.plist in Resources */ = {isa = PBXBuildFile; fileRef = B26D353E2681F5AD002E8F5D /* normalIngrid.plist */; };
 		B26D354526823E10002E8F5D /* allIngrid.plist in Resources */ = {isa = PBXBuildFile; fileRef = B26D354426823E0F002E8F5D /* allIngrid.plist */; };
+		B28DDBCA2802E8EA00689688 /* FilterRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28DDBC92802E8EA00689688 /* FilterRecipeViewController.swift */; };
+		B28DDBCC2802E90F00689688 /* FilterRecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28DDBCB2802E90F00689688 /* FilterRecipeTableViewCell.swift */; };
+		B28DDBCF2803295200689688 /* FilterRecipeDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28DDBCE2803295200689688 /* FilterRecipeDetailTableViewCell.swift */; };
 		B294AF4427E381DD00117622 /* RecipeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B294AF4327E381DD00117622 /* RecipeDetailViewController.swift */; };
 		B2A89CB92698B85E00BFBECD /* AddIngridTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A89CB82698B85E00BFBECD /* AddIngridTableViewCell.swift */; };
 		B2CD03CF27F6127200B1CA15 /* RecipesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CD03CD27F6127200B1CA15 /* RecipesTableViewCell.swift */; };
@@ -52,6 +55,9 @@
 		B28DDBC627FCC7DD00689688 /* MainIngridient+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainIngridient+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B28DDBC727FCC7DD00689688 /* Ingridient+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ingridient+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B28DDBC827FCC7DD00689688 /* Ingridient+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ingridient+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B28DDBC92802E8EA00689688 /* FilterRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterRecipeViewController.swift; sourceTree = "<group>"; };
+		B28DDBCB2802E90F00689688 /* FilterRecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterRecipeTableViewCell.swift; sourceTree = "<group>"; };
+		B28DDBCE2803295200689688 /* FilterRecipeDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterRecipeDetailTableViewCell.swift; sourceTree = "<group>"; };
 		B294AF4327E381DD00117622 /* RecipeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailViewController.swift; sourceTree = "<group>"; };
 		B2A89CB82698B85E00BFBECD /* AddIngridTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngridTableViewCell.swift; sourceTree = "<group>"; };
 		B2CD03CB27F4F4BD00B1CA15 /* Recipe+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recipe+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -121,8 +127,19 @@
 				B2CD03D527F7884300B1CA15 /* Recipes */,
 				B2CD03D727F788CE00B1CA15 /* RecipeDetail */,
 				B23D311227FCB41C00AA3E03 /* ModifyIngridient */,
+				B28DDBCD2802E91800689688 /* FilterRecipe */,
 			);
 			path = Project_D_06_21;
+			sourceTree = "<group>";
+		};
+		B28DDBCD2802E91800689688 /* FilterRecipe */ = {
+			isa = PBXGroup;
+			children = (
+				B28DDBC92802E8EA00689688 /* FilterRecipeViewController.swift */,
+				B28DDBCB2802E90F00689688 /* FilterRecipeTableViewCell.swift */,
+				B28DDBCE2803295200689688 /* FilterRecipeDetailTableViewCell.swift */,
+			);
+			path = FilterRecipe;
 			sourceTree = "<group>";
 		};
 		B2CD03D327F7881100B1CA15 /* CategoryIngrid */ = {
@@ -250,9 +267,12 @@
 				B24B92B226792DF30077D8C8 /* Project_D_06_21.xcdatamodeld in Sources */,
 				B24B92C52679300F0077D8C8 /* IngredientsViewController.swift in Sources */,
 				B24B92A826792DF30077D8C8 /* AppDelegate.swift in Sources */,
+				B28DDBCF2803295200689688 /* FilterRecipeDetailTableViewCell.swift in Sources */,
 				B2CD03D227F787F100B1CA15 /* CategoryIngridTableViewCell.swift in Sources */,
 				B24B92AA26792DF30077D8C8 /* SceneDelegate.swift in Sources */,
 				B2A89CB92698B85E00BFBECD /* AddIngridTableViewCell.swift in Sources */,
+				B28DDBCC2802E90F00689688 /* FilterRecipeTableViewCell.swift in Sources */,
+				B28DDBCA2802E8EA00689688 /* FilterRecipeViewController.swift in Sources */,
 				B294AF4427E381DD00117622 /* RecipeDetailViewController.swift in Sources */,
 				B26D35292680E40E002E8F5D /* AddIngridViewController.swift in Sources */,
 				B2CD03CF27F6127200B1CA15 /* RecipesTableViewCell.swift in Sources */,
