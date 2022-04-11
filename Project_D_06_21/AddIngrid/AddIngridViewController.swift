@@ -79,7 +79,7 @@ class AddIngridViewController: UITableViewController, AddIngridCellDelegator, NS
         cell.addIngridButton.tag = indexPath.row
         cell.addIngridButton.addTarget(self, action: #selector(addButtonTapped(sender:)), for: .touchUpInside)
         
-        cell.addIngridButton.tag = indexPath.row
+//        cell.addIngridButton.tag = indexPath.row
         
         let largeConfig = UIImage.SymbolConfiguration(scale: .large)
         if ingridients[indexPath.row].added {

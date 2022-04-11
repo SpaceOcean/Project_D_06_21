@@ -156,12 +156,12 @@
                         <rightBarButtonItems>
                             <barButtonItem title="Item" image="slider.horizontal.3" catalog="system" id="OZ1-IV-nES">
                                 <connections>
-                                    <segue destination="JuM-Vi-h9P" kind="showDetail" id="PuS-o0-DJS"/>
+                                    <segue destination="JuM-Vi-h9P" kind="showDetail" identifier="filterRecipes" id="PuS-o0-DJS"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="Item" image="plus" catalog="system" id="ztV-XR-PFO">
                                 <connections>
-                                    <segue destination="bG4-ki-Q1V" kind="show" id="dLa-ne-yBT"/>
+                                    <segue destination="bG4-ki-Q1V" kind="show" identifier="addRecipe" id="dLa-ne-yBT"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -228,8 +228,11 @@
                                             <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                             <state key="normal" title=" ">
-                                                <imageReference key="image" image="checkmark.square" catalog="system" symbolScale="large"/>
+                                                <imageReference key="image" image="square" catalog="system" symbolScale="large"/>
                                             </state>
+                                            <connections>
+                                                <action selector="filterButtonTapped:" destination="JuM-Vi-h9P" eventType="touchUpInside" id="imd-8n-vZ6"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
@@ -279,6 +282,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="filterDetailName" destination="oVQ-Gg-niH" id="xRi-aV-hKA"/>
+                                    <segue destination="6gU-ul-zhM" kind="show" identifier="filterDetailRecipes" id="6r3-Qz-YEJ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -287,13 +291,89 @@
                             <outlet property="delegate" destination="JuM-Vi-h9P" id="gIQ-fV-9hd"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="gki-aP-ovF"/>
                     <connections>
                         <outlet property="mainLabel" destination="z58-Sg-Ez5" id="5sd-8o-3lv"/>
+                        <outlet property="table" destination="wHw-T5-Sy1" id="jWU-6N-GbJ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LPW-ed-ptB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2005.7971014492755" y="1689.5089285714284"/>
+            <point key="canvasLocation" x="2149" y="1730"/>
+        </scene>
+        <!--Filter Detail Recipes View Controller-->
+        <scene sceneID="a4Q-UL-NfN">
+            <objects>
+                <tableViewController id="6gU-ul-zhM" customClass="FilterDetailRecipesViewController" customModule="Project_D_06_21" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="Mi4-aG-avJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nCT-LQ-TUS">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FilterRecipeCurrentDetail" id="01G-Tb-1hs" customClass="FilterRecipeCurrentDetailTableViewCell" customModule="Project_D_06_21" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="88.5" width="414" height="37"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="01G-Tb-1hs" id="Khg-kP-07S">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="37"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7QS-AX-LAP">
+                                            <rect key="frame" x="16" y="8" width="336" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wYn-4Z-xo6">
+                                            <rect key="frame" x="368" y="3.5" width="30" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="wYn-4Z-xo6" secondAttribute="height" multiplier="1:1" id="9N1-NY-nrz"/>
+                                                <constraint firstAttribute="width" constant="30" id="ggQ-yT-kQ0"/>
+                                            </constraints>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <state key="normal">
+                                                <imageReference key="image" image="circle" catalog="system" symbolScale="large"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="checkboxTapped:" destination="6gU-ul-zhM" eventType="touchUpInside" id="gg4-BJ-7tn"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="7QS-AX-LAP" firstAttribute="leading" secondItem="Khg-kP-07S" secondAttribute="leading" constant="16" id="5Mw-jo-m7B"/>
+                                        <constraint firstAttribute="trailing" secondItem="wYn-4Z-xo6" secondAttribute="trailing" constant="16" id="Hgs-Br-aYl"/>
+                                        <constraint firstItem="7QS-AX-LAP" firstAttribute="top" secondItem="Khg-kP-07S" secondAttribute="top" constant="8" id="JSm-9H-v1v"/>
+                                        <constraint firstItem="wYn-4Z-xo6" firstAttribute="leading" secondItem="7QS-AX-LAP" secondAttribute="trailing" constant="16" id="cpg-Y0-qYw"/>
+                                        <constraint firstAttribute="bottom" secondItem="7QS-AX-LAP" secondAttribute="bottom" constant="8" id="v2b-Yg-DbQ"/>
+                                        <constraint firstItem="wYn-4Z-xo6" firstAttribute="centerY" secondItem="Khg-kP-07S" secondAttribute="centerY" id="z1A-34-peq"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="filterCheckbox" destination="wYn-4Z-xo6" id="lcx-8b-WW0"/>
+                                    <outlet property="filterName" destination="7QS-AX-LAP" id="t2d-1F-KV7"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="6gU-ul-zhM" id="ibG-dq-xFn"/>
+                            <outlet property="delegate" destination="6gU-ul-zhM" id="sfc-tW-fsr"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Bpj-HR-Mwy"/>
+                    <connections>
+                        <outlet property="mainLabel" destination="nCT-LQ-TUS" id="nWk-Ay-PA8"/>
+                        <outlet property="table" destination="Mi4-aG-avJ" id="m43-5h-KCP"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BHu-Ow-JHW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3177" y="1730"/>
         </scene>
         <!--Recipe Detail View Controller-->
         <scene sceneID="aAD-sN-s9S">
@@ -889,14 +969,15 @@
         </scene>
     </scenes>
     <resources>
-        <image name="checkmark.square" catalog="system" width="128" height="114"/>
         <image name="chevron.right" catalog="system" width="96" height="128"/>
+        <image name="circle" catalog="system" width="128" height="121"/>
         <image name="house" catalog="system" width="128" height="106"/>
         <image name="info.circle" catalog="system" width="128" height="121"/>
         <image name="newspaper" catalog="system" width="128" height="111"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="plus.circle" catalog="system" width="128" height="121"/>
         <image name="slider.horizontal.3" catalog="system" width="128" height="100"/>
+        <image name="square" catalog="system" width="128" height="114"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

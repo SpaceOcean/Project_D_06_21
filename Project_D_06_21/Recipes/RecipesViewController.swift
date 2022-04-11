@@ -13,13 +13,16 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
     
     @IBOutlet var recipesTable: UITableView!
     
+    
+    let myFilters = Filters()
+    
     var fetchedResultsController: NSFetchedResultsController<Ingridient>!
     var recipeFetchedResultsController: NSFetchedResultsController<Ingridient>!
     var curIngridientsIndex: [Int] = []
     var curIngridients: [Ingridient] = []
     var recipes: [Recipe] = []
     var allIngrids: [MainIngridient] = []
-
+    
     private func uploadIngridMatch() {
         let recipeFetchRequest: NSFetchRequest<Recipe> = Recipe.fetchRequest()
         do {
@@ -78,12 +81,17 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
         } catch {
             print(error.localizedDescription)
         }
+        
         self.recipesTable.reloadData()
+        self.filter.allGroups = Array(Set(recipes.map{ return $0.group ?? "" }))
+        self.filter.allDifficultys = Array(Set(recipes.map{ return $0.difficulty ?? "" }))
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         recipesTable.reloadData()
+        
     }
     
     // MARK: - TABLE VIEW CELL
@@ -120,11 +128,31 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
                 let dvc = segue.destination as! RecipeDetailViewController
                 dvc.recipeItem = self.recipes[indexPath.row]
                 dvc.arrayOfUserIngridients = curIngridientsIndex
-                
             }
+        }
+        
+        if segue.identifier == "filterRecipes" {
+            let dvc = segue.destination as! FilterRecipeViewController
+            dvc.delegate = self
+        }
+        
+        if segue.identifier == "addRecipe" {
+
         }
     }
 
 
 }
 
+extension RecipesViewController: FilterRecipeDelegate {
+    
+    func uploadRecipeTable() {
+        recipesTable.reloadData()
+    }
+    
+    var filter: Filters {
+        get {
+            return myFilters
+        }
+    }
+}
