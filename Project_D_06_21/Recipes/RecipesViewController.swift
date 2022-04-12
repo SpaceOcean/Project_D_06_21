@@ -35,10 +35,32 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
     
     let searchController = UISearchController(searchResultsController: nil)
     
+    
+    private func uploadRecipesList(recipes: [Recipe]) -> [Recipe] {
+        var filteredRecipesList = recipes
+        if myFilters.onlyMy {
+            filteredRecipesList = filteredRecipesList.filter { (recipe) in recipe.isFavourite == true }
+        }
+        if myFilters.fullMatch {
+            filteredRecipesList = filteredRecipesList.filter { (recipe) in recipe.ingridMatch == 1.0 }
+        }
+        if myFilters.onlyFavorities {
+            filteredRecipesList = filteredRecipesList.filter { (recipe) in recipe.isFavourite == true  }
+        }
+        if myFilters.isCurrentDifficultySelected {
+            filteredRecipesList = filteredRecipesList.filter { (recipe) in recipe.difficulty == myFilters.allDifficultys[myFilters.currentDifficultyID]  }
+        }
+        if myFilters.isCurrentGroupSelected {
+            filteredRecipesList = filteredRecipesList.filter { (recipe) in recipe.group == myFilters.allGroups[myFilters.currentGroupID]   }
+        }
+        
+        return filteredRecipesList
+    }
+    
     private func uploadIngridMatch() {
         let recipeFetchRequest: NSFetchRequest<Recipe> = Recipe.fetchRequest()
         do {
-            recipes = try context.fetch(recipeFetchRequest)
+            recipes = uploadRecipesList(recipes: try context.fetch(recipeFetchRequest))
         } catch {
             print(error.localizedDescription)
         }
@@ -47,7 +69,7 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-         fetchedResultsController.delegate = self
+        fetchedResultsController.delegate = self
         do {
             try fetchedResultsController.performFetch()
             curIngridients = fetchedResultsController.fetchedObjects!
@@ -63,7 +85,6 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
         }
         print(curIngridientsIndex)
         
-            // print(recipes)
         for recipe in recipes {
             let indexOfRecipe = Set(recipe.ingridIndex as! [Int])
             let buf = Array(indexOfRecipe.intersection(Set(curIngridientsIndex)))
@@ -78,6 +99,35 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
         
     }
     
+    func getFilterArrays() {
+        let recipeFetchRequest: NSFetchRequest<Recipe> = Recipe.fetchRequest()
+        do {
+            recipes = try context.fetch(recipeFetchRequest)
+        } catch {
+            print(error.localizedDescription)
+        }
+        print("tyu")
+        print(recipes)
+        self.filter.allGroups = Array(Set(recipes.map{ return $0.group ?? "" }))
+        self.filter.allDifficultys = Array(Set(recipes.map{ return $0.difficulty ?? "" }))
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        getFilterArrays()
+        recipesTable.reloadData()
+        
+        print("pepka")
+        
+        
+        // Setup the Search Controller
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Поиск"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         
         uploadIngridMatch()
@@ -88,28 +138,12 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
         sortRecipeFetchRequest.sortDescriptors = [sortDescriptor]
 
         do {
-            recipes = try context.fetch(sortRecipeFetchRequest)
-
+            recipes = uploadRecipesList(recipes: try context.fetch(sortRecipeFetchRequest))
         } catch {
             print(error.localizedDescription)
         }
         
         self.recipesTable.reloadData()
-        self.filter.allGroups = Array(Set(recipes.map{ return $0.group ?? "" }))
-        self.filter.allDifficultys = Array(Set(recipes.map{ return $0.difficulty ?? "" }))
-        
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        recipesTable.reloadData()
-        
-        // Setup the Search Controller
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Поиск"
-        navigationItem.searchController = searchController
-        definesPresentationContext = true
     }
     
     // MARK: - TABLE VIEW CELL
@@ -130,7 +164,6 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
             } else {
                 recipe = recipes[indexPath.row]
             }
-            
             
             let image = UIImage(named: recipe.img ?? "noPhoto.jpg") ?? UIImage(named: "noPhoto.jpg")!
             cell.recipeImg.image = image

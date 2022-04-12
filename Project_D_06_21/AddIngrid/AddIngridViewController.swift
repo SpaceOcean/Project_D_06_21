@@ -140,9 +140,6 @@ class AddIngridViewController: UITableViewController, AddIngridCellDelegator, NS
             try fetchedResultsController.performFetch()
             curIngridients = fetchedResultsController.fetchedObjects!
             curIngridients = try context.fetch(fetchRequest)
-            print("curIngridients")
-            print(curIngridients.count)
-            //curIngridients.sort(by: { $0.name! < $1.name! })
 
         } catch {
             print(error.localizedDescription)
@@ -170,10 +167,6 @@ class AddIngridViewController: UITableViewController, AddIngridCellDelegator, NS
                 print("no save: \(error)")
             }
         }
-        
-        print("Int(rectOfCellInSuperview.origin.y)")
-        print(rowIndex)
-        
         
         table.reloadData()
     }
@@ -210,9 +203,6 @@ extension AddIngridViewController: UISearchResultsUpdating {
         filteredCurIngridients = ingridients.filter({ (ingrid: Ingridient) -> Bool in
             return ingrid.name?.lowercased().contains(searchText.lowercased()) ?? false
         })
-        print("filteredCurIngridients")
-        print(filteredCurIngridients)
-        print(ingridients)
         table.reloadData()
     }
 }
