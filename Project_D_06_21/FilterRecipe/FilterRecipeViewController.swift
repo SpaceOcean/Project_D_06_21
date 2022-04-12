@@ -60,6 +60,8 @@ class FilterRecipeViewController: UITableViewController {
             default:
                 print("error")
         }
+        
+        delegate?.uploadRecipeTable()
         table.reloadData()
     }
     

@@ -156,7 +156,7 @@
                         <rightBarButtonItems>
                             <barButtonItem title="Item" image="slider.horizontal.3" catalog="system" id="OZ1-IV-nES">
                                 <connections>
-                                    <segue destination="JuM-Vi-h9P" kind="show" identifier="filterRecipes" id="PuS-o0-DJS"/>
+                                    <segue destination="JuM-Vi-h9P" kind="showDetail" identifier="filterRecipes" id="PuS-o0-DJS"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="Item" image="plus" catalog="system" id="ztV-XR-PFO">
@@ -195,7 +195,7 @@
             <objects>
                 <tableViewController id="JuM-Vi-h9P" customClass="FilterRecipeViewController" customModule="Project_D_06_21" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="wHw-T5-Sy1">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    Фильтры" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="z58-Sg-Ez5">
@@ -306,7 +306,7 @@
             <objects>
                 <tableViewController id="6gU-ul-zhM" customClass="FilterDetailRecipesViewController" customModule="Project_D_06_21" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="Mi4-aG-avJ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nCT-LQ-TUS">

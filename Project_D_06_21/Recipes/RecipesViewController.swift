@@ -96,6 +96,7 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
         } catch let error as NSError {
             print("no save: \(error)")
         }
+        recipesTable.reloadData()
         
     }
     
@@ -106,18 +107,14 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
         } catch {
             print(error.localizedDescription)
         }
-        print("tyu")
-        print(recipes)
         self.filter.allGroups = Array(Set(recipes.map{ return $0.group ?? "" }))
         self.filter.allDifficultys = Array(Set(recipes.map{ return $0.difficulty ?? "" }))
+        recipesTable.reloadData()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         getFilterArrays()
-        recipesTable.reloadData()
-        
-        print("pepka")
         
         
         // Setup the Search Controller
@@ -144,7 +141,7 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
             print(error.localizedDescription)
         }
         
-        self.recipesTable.reloadData()
+        getFilterArrays()
     }
     
     // MARK: - TABLE VIEW CELL
@@ -218,7 +215,7 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
 extension RecipesViewController: FilterRecipeDelegate {
     
     func uploadRecipeTable() {
-        recipesTable.reloadData()
+        uploadIngridMatch()
     }
     
     var filter: Filters {

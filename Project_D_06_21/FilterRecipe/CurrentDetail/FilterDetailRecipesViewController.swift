@@ -31,6 +31,7 @@ class FilterDetailRecipesViewController: UITableViewController {
                 delegate?.filter.currentDifficultyID = (sender as! UIButton).tag
             }
         }
+        delegate?.uploadRecipeTable()
         table.reloadData()
     }
     
