@@ -30,6 +30,12 @@
 		B28DDBD528038B1400689688 /* FilterRecipeCurrentDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28DDBD428038B1400689688 /* FilterRecipeCurrentDetailTableViewCell.swift */; };
 		B294AF4427E381DD00117622 /* RecipeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B294AF4327E381DD00117622 /* RecipeDetailViewController.swift */; };
 		B2A89CB92698B85E00BFBECD /* AddIngridTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A89CB82698B85E00BFBECD /* AddIngridTableViewCell.swift */; };
+		B2C40EE3280603A300CD0F92 /* Ingridient+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C40EDD280603A300CD0F92 /* Ingridient+CoreDataClass.swift */; };
+		B2C40EE4280603A300CD0F92 /* Ingridient+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C40EDE280603A300CD0F92 /* Ingridient+CoreDataProperties.swift */; };
+		B2C40EE5280603A300CD0F92 /* Recipe+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C40EDF280603A300CD0F92 /* Recipe+CoreDataClass.swift */; };
+		B2C40EE6280603A300CD0F92 /* Recipe+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C40EE0280603A300CD0F92 /* Recipe+CoreDataProperties.swift */; };
+		B2C40EE7280603A300CD0F92 /* MainIngridient+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C40EE1280603A300CD0F92 /* MainIngridient+CoreDataClass.swift */; };
+		B2C40EE8280603A300CD0F92 /* MainIngridient+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C40EE2280603A300CD0F92 /* MainIngridient+CoreDataProperties.swift */; };
 		B2CD03CF27F6127200B1CA15 /* RecipesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CD03CD27F6127200B1CA15 /* RecipesTableViewCell.swift */; };
 		B2CD03D227F787F100B1CA15 /* CategoryIngridTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CD03D127F787F100B1CA15 /* CategoryIngridTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -53,10 +59,6 @@
 		B26D35282680E40E002E8F5D /* AddIngridViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngridViewController.swift; sourceTree = "<group>"; };
 		B26D353E2681F5AD002E8F5D /* normalIngrid.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = normalIngrid.plist; sourceTree = "<group>"; };
 		B26D354426823E0F002E8F5D /* allIngrid.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = allIngrid.plist; sourceTree = "<group>"; };
-		B28DDBC527FCC7DD00689688 /* MainIngridient+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainIngridient+CoreDataClass.swift"; sourceTree = "<group>"; };
-		B28DDBC627FCC7DD00689688 /* MainIngridient+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainIngridient+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		B28DDBC727FCC7DD00689688 /* Ingridient+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ingridient+CoreDataClass.swift"; sourceTree = "<group>"; };
-		B28DDBC827FCC7DD00689688 /* Ingridient+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ingridient+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B28DDBC92802E8EA00689688 /* FilterRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterRecipeViewController.swift; sourceTree = "<group>"; };
 		B28DDBCB2802E90F00689688 /* FilterRecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterRecipeTableViewCell.swift; sourceTree = "<group>"; };
 		B28DDBCE2803295200689688 /* FilterRecipeDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterRecipeDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -64,8 +66,12 @@
 		B28DDBD428038B1400689688 /* FilterRecipeCurrentDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterRecipeCurrentDetailTableViewCell.swift; sourceTree = "<group>"; };
 		B294AF4327E381DD00117622 /* RecipeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailViewController.swift; sourceTree = "<group>"; };
 		B2A89CB82698B85E00BFBECD /* AddIngridTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngridTableViewCell.swift; sourceTree = "<group>"; };
-		B2CD03CB27F4F4BD00B1CA15 /* Recipe+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recipe+CoreDataClass.swift"; sourceTree = "<group>"; };
-		B2CD03CC27F4F4BD00B1CA15 /* Recipe+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recipe+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B2C40EDD280603A300CD0F92 /* Ingridient+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ingridient+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B2C40EDE280603A300CD0F92 /* Ingridient+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ingridient+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B2C40EDF280603A300CD0F92 /* Recipe+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recipe+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B2C40EE0280603A300CD0F92 /* Recipe+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recipe+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B2C40EE1280603A300CD0F92 /* MainIngridient+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainIngridient+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B2C40EE2280603A300CD0F92 /* MainIngridient+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainIngridient+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B2CD03CD27F6127200B1CA15 /* RecipesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesTableViewCell.swift; sourceTree = "<group>"; };
 		B2CD03D127F787F100B1CA15 /* CategoryIngridTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryIngridTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,12 +98,12 @@
 		B24B929B26792DF30077D8C8 = {
 			isa = PBXGroup;
 			children = (
-				B28DDBC527FCC7DD00689688 /* MainIngridient+CoreDataClass.swift */,
-				B28DDBC627FCC7DD00689688 /* MainIngridient+CoreDataProperties.swift */,
-				B28DDBC727FCC7DD00689688 /* Ingridient+CoreDataClass.swift */,
-				B28DDBC827FCC7DD00689688 /* Ingridient+CoreDataProperties.swift */,
-				B2CD03CB27F4F4BD00B1CA15 /* Recipe+CoreDataClass.swift */,
-				B2CD03CC27F4F4BD00B1CA15 /* Recipe+CoreDataProperties.swift */,
+				B2C40EDD280603A300CD0F92 /* Ingridient+CoreDataClass.swift */,
+				B2C40EDE280603A300CD0F92 /* Ingridient+CoreDataProperties.swift */,
+				B2C40EDF280603A300CD0F92 /* Recipe+CoreDataClass.swift */,
+				B2C40EE0280603A300CD0F92 /* Recipe+CoreDataProperties.swift */,
+				B2C40EE1280603A300CD0F92 /* MainIngridient+CoreDataClass.swift */,
+				B2C40EE2280603A300CD0F92 /* MainIngridient+CoreDataProperties.swift */,
 				B24B92A626792DF30077D8C8 /* Project_D_06_21 */,
 				B24B92A526792DF30077D8C8 /* Products */,
 			);
@@ -274,8 +280,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B24B92C8267930450077D8C8 /* RecipesViewController.swift in Sources */,
+				B2C40EE4280603A300CD0F92 /* Ingridient+CoreDataProperties.swift in Sources */,
 				B23D311127FCB40E00AA3E03 /* ModifyIngridientViewController.swift in Sources */,
+				B2C40EE8280603A300CD0F92 /* MainIngridient+CoreDataProperties.swift in Sources */,
+				B2C40EE3280603A300CD0F92 /* Ingridient+CoreDataClass.swift in Sources */,
 				B229C65427B6927F005ED852 /* IngredientsDetailViewCell.swift in Sources */,
+				B2C40EE5280603A300CD0F92 /* Recipe+CoreDataClass.swift in Sources */,
 				B24B92AC26792DF30077D8C8 /* ViewController.swift in Sources */,
 				B26D35262680DF4A002E8F5D /* CategoryIngridViewController.swift in Sources */,
 				B28DDBD328033C9B00689688 /* FilterDetailRecipesViewController.swift in Sources */,
@@ -285,6 +295,7 @@
 				B28DDBCF2803295200689688 /* FilterRecipeDetailTableViewCell.swift in Sources */,
 				B2CD03D227F787F100B1CA15 /* CategoryIngridTableViewCell.swift in Sources */,
 				B24B92AA26792DF30077D8C8 /* SceneDelegate.swift in Sources */,
+				B2C40EE7280603A300CD0F92 /* MainIngridient+CoreDataClass.swift in Sources */,
 				B2A89CB92698B85E00BFBECD /* AddIngridTableViewCell.swift in Sources */,
 				B28DDBCC2802E90F00689688 /* FilterRecipeTableViewCell.swift in Sources */,
 				B28DDBD528038B1400689688 /* FilterRecipeCurrentDetailTableViewCell.swift in Sources */,
@@ -292,6 +303,7 @@
 				B294AF4427E381DD00117622 /* RecipeDetailViewController.swift in Sources */,
 				B26D35292680E40E002E8F5D /* AddIngridViewController.swift in Sources */,
 				B2CD03CF27F6127200B1CA15 /* RecipesTableViewCell.swift in Sources */,
+				B2C40EE6280603A300CD0F92 /* Recipe+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

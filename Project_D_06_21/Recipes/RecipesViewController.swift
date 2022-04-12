@@ -39,7 +39,7 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
     private func uploadRecipesList(recipes: [Recipe]) -> [Recipe] {
         var filteredRecipesList = recipes
         if myFilters.onlyMy {
-            filteredRecipesList = filteredRecipesList.filter { (recipe) in recipe.isFavourite == true }
+            filteredRecipesList = filteredRecipesList.filter { (recipe) in recipe.isMine == true }
         }
         if myFilters.fullMatch {
             filteredRecipesList = filteredRecipesList.filter { (recipe) in recipe.ingridMatch == 1.0 }
@@ -124,6 +124,7 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Поиск"
+        searchController.searchBar.setValue("Закрыть", forKey: "cancelButtonText")
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E258" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CurIngridient" representedClassName="CurIngridient" syncable="YES" codeGenerationType="class"/>
-    <entity name="Ingridient" representedClassName="Ingridient" syncable="YES" codeGenerationType="class">
+    <entity name="Ingridient" representedClassName="Ingridient" syncable="YES">
         <attribute name="added" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="category" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="index" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="weight" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
-    <entity name="MainIngridient" representedClassName="MainIngridient" syncable="YES" codeGenerationType="class">
+    <entity name="MainIngridient" representedClassName="MainIngridient" syncable="YES">
         <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="weight" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
     </entity>
-    <entity name="Recipe" representedClassName="Recipe" syncable="YES" codeGenerationType="class">
+    <entity name="Recipe" representedClassName="Recipe" syncable="YES">
         <attribute name="difficulty" optional="YES" attributeType="String"/>
         <attribute name="group" optional="YES" attributeType="String"/>
         <attribute name="img" optional="YES" attributeType="String"/>
@@ -22,6 +22,7 @@
         <attribute name="ingridIndex" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData"/>
         <attribute name="ingridMatch" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="isFavourite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isMine" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="steps" optional="YES" attributeType="String"/>
     </entity>
@@ -29,6 +30,6 @@
         <element name="CurIngridient" positionX="-45" positionY="36" width="128" height="29"/>
         <element name="Ingridient" positionX="-54" positionY="36" width="128" height="104"/>
         <element name="MainIngridient" positionX="-45" positionY="45" width="128" height="74"/>
-        <element name="Recipe" positionX="-54" positionY="-9" width="128" height="179"/>
+        <element name="Recipe" positionX="-54" positionY="-9" width="128" height="194"/>
     </elements>
 </model>

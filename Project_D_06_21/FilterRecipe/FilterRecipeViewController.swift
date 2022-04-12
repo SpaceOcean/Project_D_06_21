@@ -90,11 +90,6 @@ class FilterRecipeViewController: UITableViewController {
         
         table.reloadData()
         
-        print("hui")
-        print(delegate?.filter.fullMatch)
-        print(delegate?.filter.onlyMy)
-        print(delegate?.filter.onlyFavorities)
-        
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

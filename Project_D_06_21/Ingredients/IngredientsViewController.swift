@@ -63,6 +63,7 @@ class IngredientsViewController: UITableViewController, NSFetchedResultsControll
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Поиск"
+        searchController.searchBar.setValue("Закрыть", forKey: "cancelButtonText")
         navigationItem.searchController = searchController
         definesPresentationContext = true
         

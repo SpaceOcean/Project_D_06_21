@@ -134,6 +134,7 @@ class ViewController: UIViewController {
             let ingrids = recipeDictionary["ingredients"]!.components(separatedBy: ";")
             recipe.ingridCount = Int16(ingrids.count)
             recipe.ingridMatch = 0
+            recipe.isMine = false
             print()
             var result: Array<Int32> = []
             for ingrid in ingrids {

@@ -2,7 +2,7 @@
 //  Recipe+CoreDataClass.swift
 //  Project_D_06_21
 //
-//  Created by Владислав Комсомоленко on 30.03.2022.
+//  Created by Владислав Комсомоленко on 12.04.2022.
 //
 //
 
