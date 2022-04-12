@@ -23,6 +23,18 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
     var recipes: [Recipe] = []
     var allIngrids: [MainIngridient] = []
     
+    private var filteredRecipes: [Recipe] = []
+    private var searchBarIsEmpty: Bool {
+        guard let text = searchController.searchBar.text else { return false }
+        return text.isEmpty
+    }
+    
+    private var isFiltering: Bool {
+        return searchController.isActive && !searchBarIsEmpty
+    }
+    
+    let searchController = UISearchController(searchResultsController: nil)
+    
     private func uploadIngridMatch() {
         let recipeFetchRequest: NSFetchRequest<Recipe> = Recipe.fetchRequest()
         do {
@@ -92,23 +104,40 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
         super.viewDidLoad()
         recipesTable.reloadData()
         
+        // Setup the Search Controller
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Поиск"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
     
     // MARK: - TABLE VIEW CELL
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isFiltering {
+            return filteredRecipes.count
+        }
         return recipes.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "RecipesTableViewCell") as? RecipesTableViewCell {
+            var recipe: Recipe
             
-            let image = UIImage(named: recipes[indexPath.row].img ?? "noPhoto.jpg") ?? UIImage(named: "noPhoto.jpg")!
+            if isFiltering {
+                recipe = filteredRecipes[indexPath.row]
+            } else {
+                recipe = recipes[indexPath.row]
+            }
+            
+            
+            let image = UIImage(named: recipe.img ?? "noPhoto.jpg") ?? UIImage(named: "noPhoto.jpg")!
             cell.recipeImg.image = image
-            cell.recipeName.text = recipes[indexPath.row].name
-            let matchedIngrids = Int(recipes[indexPath.row].ingridMatch * Double(recipes[indexPath.row].ingridCount))
-            cell.ingridMatchLabel.text = "\(matchedIngrids)/\(recipes[indexPath.row].ingridCount)"
-            if recipes[indexPath.row].ingridCount == matchedIngrids {
+            cell.recipeName.text = recipe.name
+            let matchedIngrids = Int(recipe.ingridMatch * Double(recipe.ingridCount))
+            cell.ingridMatchLabel.text = "\(matchedIngrids)/\(recipe.ingridCount)"
+            if recipe.ingridCount == matchedIngrids {
                 cell.ingridMatchView.backgroundColor = UIColor.green.withAlphaComponent(0.85)
             } else if matchedIngrids == 0 {
                 cell.ingridMatchView.backgroundColor = UIColor(red: 248, green: 0, blue: 0, alpha: 0.75)
@@ -125,8 +154,16 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "recipeDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
+                var recipe: Recipe
+                
+                if isFiltering {
+                    recipe = filteredRecipes[indexPath.row]
+                } else {
+                    recipe = recipes[indexPath.row]
+                }
+                
                 let dvc = segue.destination as! RecipeDetailViewController
-                dvc.recipeItem = self.recipes[indexPath.row]
+                dvc.recipeItem = recipe
                 dvc.arrayOfUserIngridients = curIngridientsIndex
             }
         }
@@ -154,5 +191,18 @@ extension RecipesViewController: FilterRecipeDelegate {
         get {
             return myFilters
         }
+    }
+}
+
+extension RecipesViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
+    
+    private func filterContentForSearchText(_ searchText: String) {
+        filteredRecipes = recipes.filter({ (recipe: Recipe) -> Bool in
+            return recipe.name?.lowercased().contains(searchText.lowercased()) ?? false
+        })
+        recipesTable.reloadData()
     }
 }

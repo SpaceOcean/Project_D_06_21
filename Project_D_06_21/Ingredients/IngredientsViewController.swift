@@ -11,9 +11,22 @@ import CoreData
 class IngredientsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     var fetchedResultsController: NSFetchedResultsController<Ingridient>!
-    var curIngridients: [Ingridient] = []
-    var allIngridients: [Ingridient] = []
+    
+    private var myCurIngridients: [Ingridient] = []
+    private var allIngridients: [Ingridient] = []
+    private var filteredMyCurIngridients: [Ingridient] = []
+    private var searchBarIsEmpty: Bool {
+        guard let text = searchController.searchBar.text else { return false }
+        return text.isEmpty
+    }
+    
+    private var isFiltering: Bool {
+        return searchController.isActive && !searchBarIsEmpty
+    }
+    
     var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    let searchController = UISearchController(searchResultsController: nil)
     
     // MARK: - viewDidLoad
     
@@ -38,13 +51,21 @@ class IngredientsViewController: UITableViewController, NSFetchedResultsControll
         
         do {
             try fetchedResultsController.performFetch()
-            curIngridients = fetchedResultsController.fetchedObjects!
-            curIngridients = try context.fetch(fetchRequest)
+            myCurIngridients = fetchedResultsController.fetchedObjects!
+            myCurIngridients = try context.fetch(fetchRequest)
             //curIngridients.sort(by: { $0.name! < $1.name! })
 
         } catch {
             print(error.localizedDescription)
         }
+        
+        // Setup the Search Controller
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Поиск"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        
     }
     
     // MARK: - TABLE VIEW DATA SOURCE (UPDATE TABLE)
@@ -64,7 +85,7 @@ class IngredientsViewController: UITableViewController, NSFetchedResultsControll
         default:
             tableView.reloadData()
         }
-        curIngridients = controller.fetchedObjects as! [Ingridient]
+        myCurIngridients = controller.fetchedObjects as! [Ingridient]
 
     }
     
@@ -76,29 +97,23 @@ class IngredientsViewController: UITableViewController, NSFetchedResultsControll
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let fetchRequest: NSFetchRequest<Ingridient> = Ingridient.fetchRequest()
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        
-        fetchRequest.predicate = NSPredicate(format: "added = true")
-        
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-         fetchedResultsController.delegate = self
-        
-        do {
-            try fetchedResultsController.performFetch()
-            return try context.fetch(fetchRequest).count
-            //curIngridients.sort(by: { $0.name! < $1.name! })
-
-        } catch {
-            return 0
+        if isFiltering {
+            return filteredMyCurIngridients.count
         }
+        return myCurIngridients.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-       cell.textLabel?.text = curIngridients[indexPath.row].name
+        var ingrid: Ingridient
+        
+        if isFiltering {
+            ingrid = filteredMyCurIngridients[indexPath.row]
+        } else {
+            ingrid = myCurIngridients[indexPath.row]
+        }
+        
+       cell.textLabel?.text = ingrid.name
        return cell
     }
     
@@ -125,7 +140,7 @@ class IngredientsViewController: UITableViewController, NSFetchedResultsControll
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showCategory" {
             let dvc = segue.destination as! CategoryIngridViewController
-            dvc.curIngridientsArray = curIngridients
+            dvc.curIngridientsArray = myCurIngridients
             dvc.delegate = self
         }
     }
@@ -135,9 +150,17 @@ extension IngredientsViewController: DeleteRowInTableviewDelegate {
   func deleteRow(inTableview curIngridientIndex: Int) {
       
       let indexPath = IndexPath(row: curIngridientIndex, section: 0)
-      let curIngridient = self.curIngridients[curIngridientIndex]
+      var curIngridient: Ingridient
+      
+      if isFiltering {
+          curIngridient = filteredMyCurIngridients[curIngridientIndex]
+          self.filteredMyCurIngridients.remove(at: curIngridientIndex)
+      } else {
+          curIngridient = myCurIngridients[curIngridientIndex]
+          self.myCurIngridients.remove(at: curIngridientIndex)
+      }
+      
       let normalIndex = self.allIngridients.firstIndex{$0 === curIngridient}!
-      self.curIngridients.remove(at: curIngridientIndex)
       self.allIngridients[normalIndex].added = false
       self.tableView.deleteRows(at: [indexPath], with: .automatic)
       do {
@@ -149,3 +172,15 @@ extension IngredientsViewController: DeleteRowInTableviewDelegate {
   }
 }
 
+extension IngredientsViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
+    
+    private func filterContentForSearchText(_ searchText: String) {
+        filteredMyCurIngridients = myCurIngridients.filter({ (ingrid: Ingridient) -> Bool in
+            return ingrid.name?.lowercased().contains(searchText.lowercased()) ?? false
+        })
+        tableView.reloadData()
+    }
+}
