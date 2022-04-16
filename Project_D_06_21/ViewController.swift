@@ -138,11 +138,12 @@ class ViewController: UIViewController {
             print()
             var result: Array<Int32> = []
             for ingrid in ingrids {
-                result.append(allIngrids.filter{$0.name!.contains(ingrid) }[0].index as Int32)
+                result.append(allIngrids.filter{ $0.name!.contains(ingrid) }[0].index as Int32)
             }
-            // print(ingrids)
+            print("565656ingrids")
+             print(ingrids)
             recipe.ingridIndex = result as NSObject
-            // print(result)
+             print(result)
         }
         
     }

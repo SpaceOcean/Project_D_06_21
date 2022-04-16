@@ -205,6 +205,8 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
         }
         
         if segue.identifier == "addRecipe" {
+            let dvc = segue.destination as! AddNewRecipeTableViewController
+            dvc.newRecipe = Recipe()
 
         }
     }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B22432E12808925E0046CD39 /* AddNewRecipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22432E02808925E0046CD39 /* AddNewRecipeTableViewController.swift */; };
 		B229C65427B6927F005ED852 /* IngredientsDetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B229C65327B6927F005ED852 /* IngredientsDetailViewCell.swift */; };
 		B23D311127FCB40E00AA3E03 /* ModifyIngridientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23D311027FCB40E00AA3E03 /* ModifyIngridientViewController.swift */; };
 		B24B92A826792DF30077D8C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24B92A726792DF30077D8C8 /* AppDelegate.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B22432E02808925E0046CD39 /* AddNewRecipeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewRecipeTableViewController.swift; sourceTree = "<group>"; };
 		B229C65327B6927F005ED852 /* IngredientsDetailViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsDetailViewCell.swift; sourceTree = "<group>"; };
 		B23D311027FCB40E00AA3E03 /* ModifyIngridientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyIngridientViewController.swift; sourceTree = "<group>"; };
 		B24B92A426792DF30077D8C8 /* Project_D_06_21.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project_D_06_21.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +89,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B22432E22808926B0046CD39 /* AddNewRecipe */ = {
+			isa = PBXGroup;
+			children = (
+				B22432E02808925E0046CD39 /* AddNewRecipeTableViewController.swift */,
+			);
+			path = AddNewRecipe;
+			sourceTree = "<group>";
+		};
 		B23D311227FCB41C00AA3E03 /* ModifyIngridient */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +148,7 @@
 				B2CD03D727F788CE00B1CA15 /* RecipeDetail */,
 				B23D311227FCB41C00AA3E03 /* ModifyIngridient */,
 				B28DDBCD2802E91800689688 /* FilterRecipe */,
+				B22432E22808926B0046CD39 /* AddNewRecipe */,
 			);
 			path = Project_D_06_21;
 			sourceTree = "<group>";
@@ -301,6 +312,7 @@
 				B28DDBD528038B1400689688 /* FilterRecipeCurrentDetailTableViewCell.swift in Sources */,
 				B28DDBCA2802E8EA00689688 /* FilterRecipeViewController.swift in Sources */,
 				B294AF4427E381DD00117622 /* RecipeDetailViewController.swift in Sources */,
+				B22432E12808925E0046CD39 /* AddNewRecipeTableViewController.swift in Sources */,
 				B26D35292680E40E002E8F5D /* AddIngridViewController.swift in Sources */,
 				B2CD03CF27F6127200B1CA15 /* RecipesTableViewCell.swift in Sources */,
 				B2C40EE6280603A300CD0F92 /* Recipe+CoreDataProperties.swift in Sources */,
