@@ -37,8 +37,6 @@ protocol FilterRecipeDelegate: NSObjectProtocol {
 }
 
 
-
-
 class FilterRecipeViewController: UITableViewController {
     
     @IBOutlet var table: UITableView!

@@ -7,11 +7,46 @@
 
 import UIKit
 
+class NewRecipe {
+    var difficulty: String?
+    var group: String?
+    var img: Data?
+    var ingredients: String?
+    var ingridCount: Int16
+    var ingridIndex: [Int]?
+    var ingridMatch: Double
+    var ingridNormalIndex: [Int]?
+    var isFavourite: Bool
+    var isMine: Bool
+    var name: String?
+    var steps: String?
+    
+    init() {
+        self.difficulty = ""
+        self.group = ""
+        self.img = (UIImage(named: "noPhoto.jpg")!).pngData()
+        self.ingredients = ""
+        self.ingridCount = 0
+        self.ingridIndex = [] as [Int]
+        self.ingridMatch = 0
+        self.ingridNormalIndex = [] as [Int]
+        self.isFavourite = false
+        self.isMine = true
+        self.name = ""
+        self.steps = ""
+    }
+}
+
 class AddNewRecipeTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    var newRecipe: Recipe = Recipe()
+    var newRecipe: NewRecipe = NewRecipe()
+    var delegate: FilterRecipeDelegate?
     
     @IBOutlet weak var newRecipeImg: UIImageView!
+    
+    
+    @IBOutlet weak var difficulty: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,23 +83,26 @@ class AddNewRecipeTableViewController: UITableViewController, UIImagePickerContr
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      
-      if indexPath.row == 0 {
-        let alertController = UIAlertController(title: "Источник фотографии", message: nil, preferredStyle: .actionSheet)
-        let cameraAction = UIAlertAction(title: "Камера", style: .default, handler: { (action) in
-          self.chooseImagePickerAction(source: .camera)
-        })
-        let photoLibAction = UIAlertAction(title: "Фото", style: .default, handler: { (action) in
-          self.chooseImagePickerAction(source: .photoLibrary)
-        })
-        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
-        alertController.addAction(cameraAction)
-        alertController.addAction(photoLibAction)
-        alertController.addAction(cancelAction)
-        self.present(alertController, animated: true, completion: nil)
-      }
-      
-      tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.row == 0 {
+            let alertController = UIAlertController(title: "Источник фотографии", message: nil, preferredStyle: .actionSheet)
+            let cameraAction = UIAlertAction(title: "Камера", style: .default, handler: { (action) in
+              self.chooseImagePickerAction(source: .camera)
+            })
+            let photoLibAction = UIAlertAction(title: "Фото", style: .default, handler: { (action) in
+              self.chooseImagePickerAction(source: .photoLibrary)
+            })
+            let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+            alertController.addAction(cameraAction)
+            alertController.addAction(photoLibAction)
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true, completion: nil)
+            
+        }
+//        if indexPath.row == 4 {
+//            
+//        }
+        tableView.deselectRow(at: indexPath, animated: true)
+        
     }
 
       
@@ -76,6 +114,17 @@ class AddNewRecipeTableViewController: UITableViewController, UIImagePickerContr
         imagePicker.sourceType = source
         self.present(imagePicker, animated: true, completion: nil)
       }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "addIngridsToRecipe" {
+            let dvc = segue.destination as! AddNewIngridsToRecipeTableViewController
+            
+            dvc.newRecipe = newRecipe
+        }
+        if segue.identifier == "addSteps" {
+            
+        }
     }
 }
 

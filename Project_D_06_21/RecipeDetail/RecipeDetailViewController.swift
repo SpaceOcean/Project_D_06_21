@@ -60,12 +60,12 @@ class RecipeDetailViewController: UIViewController {
         var recipeDetailText = ""
         let steps = recipeItem.steps ?? ""
         let arrayOfSteps = steps.components(separatedBy: "$%$")
-        print(arrayOfSteps)
+//        print(arrayOfSteps)
         if arrayOfSteps.count == 1 {
             recipeDetailText += "    \(arrayOfSteps[0])"
         } else {
             for i in 0...arrayOfSteps.count-1 {
-                print(i)
+//                print(i)
                 recipeDetailText += "\(i+1). \(arrayOfSteps[i])"
                 if i != arrayOfSteps.count-1 {
                     recipeDetailText += "\n\n"
@@ -76,7 +76,7 @@ class RecipeDetailViewController: UIViewController {
         arrayOfIngredients = ingredients.components(separatedBy: ";")
 //        arrayOfIngridIdMatch = getIngridIdMatch(arrayOfIngredients)
         
-        let myImage: UIImage = UIImage(named: recipeItem.img ?? defaultImg) ?? UIImage(named: defaultImg)!
+        let myImage: UIImage = UIImage(data: recipeItem.img!) ?? UIImage(named: defaultImg)!
         recipeNameLabel.text = recipeItem.name
         let matchCount = Int(Double(recipeItem.ingridCount) * recipeItem.ingridMatch)
         recipeMatchLabel.text = "Совпало \(matchCount) из \(recipeItem.ingridCount) ингредиентов"
@@ -125,7 +125,11 @@ extension RecipeDetailViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "ingridientId", for: indexPath) as? IngredientsDetailViewCell {
             cell.ingridName.text = arrayOfIngredients[indexPath.row]
-            if arrayOfUserIngridients.contains((recipeItem.ingridIndex as! [Int] )[indexPath.row]) {
+            print("indexPath.row")
+            print(indexPath.row)
+            print(arrayOfUserIngridients)
+            print(recipeItem.ingridIndex!)
+            if arrayOfUserIngridients.contains(recipeItem.ingridIndex![indexPath.row]) {
                 cell.accessoryType = UITableViewCell.AccessoryType.checkmark
             } else {
                 cell.accessoryType = UITableViewCell.AccessoryType.none

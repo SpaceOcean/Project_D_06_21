@@ -83,13 +83,19 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
         for ingrid in curIngridients {
             curIngridientsIndex.append(contentsOf: ingrid.index!.components(separatedBy: ";").map{ Int($0) ?? Int(-1)})
         }
-        print(curIngridientsIndex)
+//        print(curIngridientsIndex)
         
         for recipe in recipes {
-            let indexOfRecipe = Set(recipe.ingridIndex as! [Int])
-            let buf = Array(indexOfRecipe.intersection(Set(curIngridientsIndex)))
-            recipe.ingridMatch = Double(buf.count)/Double(recipe.ingridCount)
-            // print(recipe.ingridMatch)
+            let indexOfRecipe:Set<Int> = Set(recipe.ingridIndex ?? [])
+            let buf = Array(indexOfRecipe.intersection(Set(curIngridientsIndex))) as? [Int]
+            recipe.ingridMatch = Double(buf?.count ?? 0)/Double(recipe.ingridCount)
+//            
+//            print("recipe.ingridMatch")
+//            print(indexOfRecipe)
+//            print(curIngridientsIndex)
+//            print(recipe.ingridMatch)
+//            print(buf)
+//            print(recipe.ingridCount)
         }
         do {
             try context.save()
@@ -124,6 +130,8 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
         searchController.searchBar.setValue("Закрыть", forKey: "cancelButtonText")
         navigationItem.searchController = searchController
         definesPresentationContext = true
+        recipesTable.reloadData()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -163,7 +171,7 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
                 recipe = recipes[indexPath.row]
             }
             
-            let image = UIImage(named: recipe.img ?? "noPhoto.jpg") ?? UIImage(named: "noPhoto.jpg")!
+            let image = UIImage(data: recipe.img!) ?? UIImage(named: "noPhoto.jpg")!
             cell.recipeImg.image = image
             cell.recipeName.text = recipe.name
             let matchedIngrids = Int(recipe.ingridMatch * Double(recipe.ingridCount))
@@ -206,7 +214,11 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
         
         if segue.identifier == "addRecipe" {
             let dvc = segue.destination as! AddNewRecipeTableViewController
-            dvc.newRecipe = Recipe()
+            
+            let newRecipe = NewRecipe()
+            dvc.newRecipe = newRecipe
+            dvc.delegate = self
+            
 
         }
     }
