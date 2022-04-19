@@ -20,6 +20,7 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
     var recipeFetchedResultsController: NSFetchedResultsController<Ingridient>!
     var curIngridientsIndex: [Int] = []
     var curIngridients: [Ingridient] = []
+    var normalIngridients: [Ingridient] = []
     var recipes: [Recipe] = []
     var allIngrids: [MainIngridient] = []
     
@@ -35,6 +36,23 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
     
     let searchController = UISearchController(searchResultsController: nil)
     
+    
+    private func getNormalIngridientsList() {
+        
+        let fetchRequest: NSFetchRequest<Ingridient> = Ingridient.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController.delegate = self
+        do {
+            try fetchedResultsController.performFetch()
+            normalIngridients = fetchedResultsController.fetchedObjects!
+            normalIngridients = try context.fetch(fetchRequest)
+
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
     
     private func uploadRecipesList(recipes: [Recipe]) -> [Recipe] {
         var filteredRecipesList = recipes
@@ -81,21 +99,20 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
         
         curIngridientsIndex = []
         for ingrid in curIngridients {
-            curIngridientsIndex.append(contentsOf: ingrid.index!.components(separatedBy: ";").map{ Int($0) ?? Int(-1)})
+            curIngridientsIndex.append(Int(ingrid.curIndex))
         }
-//        print(curIngridientsIndex)
         
         for recipe in recipes {
-            let indexOfRecipe:Set<Int> = Set(recipe.ingridIndex ?? [])
-            let buf = Array(indexOfRecipe.intersection(Set(curIngridientsIndex))) as? [Int]
-            recipe.ingridMatch = Double(buf?.count ?? 0)/Double(recipe.ingridCount)
-//            
-//            print("recipe.ingridMatch")
-//            print(indexOfRecipe)
-//            print(curIngridientsIndex)
-//            print(recipe.ingridMatch)
-//            print(buf)
-//            print(recipe.ingridCount)
+            var buf: Double = 0.0
+            
+            let ingridIntersection = Array(Set(curIngridientsIndex).intersection(Set(recipe.ingridNormalIndex ?? [])))
+            
+            recipe.ingridMatchCount = Int16(ingridIntersection.count)
+            
+            for ingrid in ingridIntersection {
+                buf += normalIngridients[ingrid].weight
+            }
+            recipe.ingridMatch = buf / Double(recipe.ingridCount)
         }
         do {
             try context.save()
@@ -107,9 +124,13 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
     }
     
     func getFilterArrays() {
-        let recipeFetchRequest: NSFetchRequest<Recipe> = Recipe.fetchRequest()
+        let sortRecipeFetchRequest: NSFetchRequest<Recipe>  = Recipe.fetchRequest()
+        
+        let sortDescriptor = NSSortDescriptor(key: "ingridMatch", ascending: false)
+        sortRecipeFetchRequest.sortDescriptors = [sortDescriptor]
+        
         do {
-            recipes = try context.fetch(recipeFetchRequest)
+            recipes = try context.fetch(sortRecipeFetchRequest)
         } catch {
             print(error.localizedDescription)
         }
@@ -120,9 +141,11 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        getNormalIngridientsList()
         getFilterArrays()
-        
-        
+        uploadIngridMatch()
+
         // Setup the Search Controller
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -137,9 +160,9 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
     override func viewWillAppear(_ animated: Bool) {
         
         uploadIngridMatch()
-        
+
         let sortRecipeFetchRequest: NSFetchRequest<Recipe>  = Recipe.fetchRequest()
-        
+
         let sortDescriptor = NSSortDescriptor(key: "ingridMatch", ascending: false)
         sortRecipeFetchRequest.sortDescriptors = [sortDescriptor]
 
@@ -148,7 +171,7 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
         } catch {
             print(error.localizedDescription)
         }
-        
+
         getFilterArrays()
     }
     
@@ -174,11 +197,10 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
             let image = UIImage(data: recipe.img!) ?? UIImage(named: "noPhoto.jpg")!
             cell.recipeImg.image = image
             cell.recipeName.text = recipe.name
-            let matchedIngrids = Int(recipe.ingridMatch * Double(recipe.ingridCount))
-            cell.ingridMatchLabel.text = "\(matchedIngrids)/\(recipe.ingridCount)"
-            if recipe.ingridCount == matchedIngrids {
+            cell.ingridMatchLabel.text = "\(recipe.ingridMatchCount)/\(recipe.ingridCount)"
+            if recipe.ingridCount == recipe.ingridMatchCount {
                 cell.ingridMatchView.backgroundColor = UIColor.green.withAlphaComponent(0.85)
-            } else if matchedIngrids == 0 {
+            } else if recipe.ingridMatchCount == 0 {
                 cell.ingridMatchView.backgroundColor = UIColor(red: 248, green: 0, blue: 0, alpha: 0.75)
             } else {
                 cell.ingridMatchView.backgroundColor = UIColor.yellow.withAlphaComponent(0.85)
@@ -218,8 +240,6 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
             let newRecipe = NewRecipe()
             dvc.newRecipe = newRecipe
             dvc.delegate = self
-            
-
         }
     }
 

@@ -135,6 +135,7 @@ class ViewController: UIViewController {
             let ingrids = recipeDictionary["ingredients"]!.components(separatedBy: ";")
             recipe.ingridCount = Int16(ingrids.count)
             recipe.ingridMatch = 0
+            recipe.ingridMatchCount = 0
             recipe.isMine = false
 
             // ingridIndex
@@ -153,7 +154,8 @@ class ViewController: UIViewController {
                 guard let newIndex = Optional(Int(allIngridients.filter{ $0.index!.components(separatedBy: ";").contains(String(ingrid)) }[0].curIndex)) else { return }
                 ingridNormalIndex.append(newIndex)
             }
-            recipe.ingridIndex = ingridNormalIndex as [Int]
+            
+            recipe.ingridNormalIndex = ingridNormalIndex as [Int]
 
         }
         

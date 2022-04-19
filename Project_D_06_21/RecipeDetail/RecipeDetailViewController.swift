@@ -14,7 +14,6 @@ class RecipeDetailViewController: UIViewController {
     let defaultImg: String = "noPhoto"
     var arrayOfIngredients: Array<String> = []
     var arrayOfUserIngridients: Array<Int> = []
-    var arrayOfIngridIdMatch: Array<Bool> = []
     
     @IBOutlet weak var recipeNameLabel: UILabel!
     @IBOutlet weak var recipeImage: UIImageView!
@@ -60,12 +59,10 @@ class RecipeDetailViewController: UIViewController {
         var recipeDetailText = ""
         let steps = recipeItem.steps ?? ""
         let arrayOfSteps = steps.components(separatedBy: "$%$")
-//        print(arrayOfSteps)
         if arrayOfSteps.count == 1 {
             recipeDetailText += "    \(arrayOfSteps[0])"
         } else {
             for i in 0...arrayOfSteps.count-1 {
-//                print(i)
                 recipeDetailText += "\(i+1). \(arrayOfSteps[i])"
                 if i != arrayOfSteps.count-1 {
                     recipeDetailText += "\n\n"
@@ -74,12 +71,10 @@ class RecipeDetailViewController: UIViewController {
         }
         let ingredients = recipeItem.ingredients ?? ""
         arrayOfIngredients = ingredients.components(separatedBy: ";")
-//        arrayOfIngridIdMatch = getIngridIdMatch(arrayOfIngredients)
         
         let myImage: UIImage = UIImage(data: recipeItem.img!) ?? UIImage(named: defaultImg)!
         recipeNameLabel.text = recipeItem.name
-        let matchCount = Int(Double(recipeItem.ingridCount) * recipeItem.ingridMatch)
-        recipeMatchLabel.text = "Совпало \(matchCount) из \(recipeItem.ingridCount) ингредиентов"
+        recipeMatchLabel.text = "Совпало \(recipeItem.ingridMatchCount) из \(recipeItem.ingridCount) ингредиентов"
         recipeGroupLabel.text = ["Подборка: ", recipeItem.group].compactMap { $0 }
         .joined(separator: " ")
         recipeDifficultyLabel.text = ["Сложность: ", recipeItem.difficulty].compactMap { $0 }
@@ -125,11 +120,7 @@ extension RecipeDetailViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "ingridientId", for: indexPath) as? IngredientsDetailViewCell {
             cell.ingridName.text = arrayOfIngredients[indexPath.row]
-            print("indexPath.row")
-            print(indexPath.row)
-            print(arrayOfUserIngridients)
-            print(recipeItem.ingridIndex!)
-            if arrayOfUserIngridients.contains(recipeItem.ingridIndex![indexPath.row]) {
+            if arrayOfUserIngridients.contains(recipeItem.ingridNormalIndex![indexPath.row]) {
                 cell.accessoryType = UITableViewCell.AccessoryType.checkmark
             } else {
                 cell.accessoryType = UITableViewCell.AccessoryType.none

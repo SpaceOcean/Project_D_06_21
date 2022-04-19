@@ -20,9 +20,10 @@
         <attribute name="img" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="ingredients" optional="YES" attributeType="String"/>
         <attribute name="ingridCount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="ingridIndex" optional="YES" attributeType="Transformable" valueTransformerName="" customClassName="Array[Int]"/>
+        <attribute name="ingridIndex" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[Int]"/>
         <attribute name="ingridMatch" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="ingridNormalIndex" optional="YES" attributeType="Transformable" customClassName="Array[Int]"/>
+        <attribute name="ingridMatchCount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="ingridNormalIndex" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[Int]"/>
         <attribute name="isFavourite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isMine" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
@@ -32,6 +33,6 @@
         <element name="CurIngridient" positionX="-45" positionY="36" width="128" height="29"/>
         <element name="Ingridient" positionX="-54" positionY="36" width="128" height="119"/>
         <element name="MainIngridient" positionX="-45" positionY="45" width="128" height="74"/>
-        <element name="Recipe" positionX="-54" positionY="-9" width="128" height="209"/>
+        <element name="Recipe" positionX="-54" positionY="-9" width="128" height="224"/>
     </elements>
 </model>
