@@ -72,8 +72,6 @@ class ViewController: UIViewController {
         
         do {
             allIngridients = try context.fetch(fetchRequest)
-            //allIngridients.sort(by: { $0.name! < $1.name! })
-
         } catch {
             print(error.localizedDescription)
         }
@@ -172,7 +170,12 @@ class ViewController: UIViewController {
     }
     
     func waitEndOfEducation() {
-        
+        while !self.endOfEducation.closed {
+            sleep(UInt32(0.01))
+        }
+    }
+    
+    func addData() {
         let fetchRequest: NSFetchRequest<Recipe> = Recipe.fetchRequest()
 
         var records = 0
@@ -182,24 +185,13 @@ class ViewController: UIViewController {
         } catch let error as NSError {
             print(error.localizedDescription)
         }
-        guard records == 0,
-              !self.endOfEducation.closed else { return }
-            while !self.endOfEducation.closed {
-                print("fcbar")
-                sleep(UInt32(0.01))
-            }
-    }
-    
-    func qwerty() {
-        print("kek1")
-        print("This is run on a background queue")
-
-        print("lol1")
+        if records != 0 {
+            self.endOfEducation.closed = true
+        }
+        
         self.getDataFrom()
-        print("lol2")
-//
         self.getDataFromAllIngrids()
-        print("lol3")
+
         let fetchAllIngridsRequest: NSFetchRequest<MainIngridient>  = MainIngridient.fetchRequest()
         do {
             self.allIngrids = try self.context.fetch(fetchAllIngridsRequest)
@@ -208,13 +200,7 @@ class ViewController: UIViewController {
             print(error.localizedDescription)
         }
         
-            print("kek3")
-        print("lol4")
-        
-        
-        
         self.getDataFromRecipes()
-        
 
         do {
             try context.save()
@@ -235,27 +221,16 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         DispatchQueue.global().async {
-//            let serialQueue = DispatchQueue(label: "serial-queue")
             
-            let workItem1 = DispatchWorkItem {
-            self.qwerty()
+            let workItem = DispatchWorkItem {
+            self.addData()
             }
-            
             
             let group = DispatchGroup()
             
-            DispatchQueue.global().async(group: group, execute: workItem1)
-            
-            group.notify(queue: DispatchQueue.main) {
-//                DispatchQueue.main.async {
-//                    self.activity.stopAnimating()
-//                    self.performSegue(withIdentifier: "mainPage", sender: nil)
-//                }
-            }
-
+            DispatchQueue.global().async(group: group, execute: workItem)
         }
         
-        print("kek2")
         self.activity.startAnimating()
         self.logoImg.image = UIImage(named: "logo")
         
@@ -270,18 +245,12 @@ class ViewController: UIViewController {
             print(error.localizedDescription)
         }
         
-        
-        print("lol5")
         if records == 0 {
             DispatchQueue.main.async {
-                print("kek33")
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "training") as! TrainingViewController
                 vc.endOfEducation = self.endOfEducation
                 self.present(vc, animated: true, completion: nil)
-            
             }
         }
-        
     }
-
 }
