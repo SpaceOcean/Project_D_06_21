@@ -104,8 +104,7 @@ class AddIngridViewController: UITableViewController, AddIngridCellDelegator, NS
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "IngridientCell") as! AddIngridTableViewCell
-        print("IngridientCell")
-        print(ingridients.count)
+
         cell.addIngrigNameLabel.text = ingrid.name
         cell.addIngridButton.tag = indexPath.row
         cell.addIngridButton.addTarget(self, action: #selector(addButtonTapped(sender:)), for: .touchUpInside)

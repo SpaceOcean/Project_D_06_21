@@ -9,7 +9,18 @@
 import UIKit
 import CoreData
 
+
+public class EndOfEducation {
+    var closed: Bool = false
+    
+    init() {
+        self.closed = false
+    }
+}
+
 class ViewController: UIViewController {
+    
+
 
     @IBOutlet weak var logoImg: UIImageView!
     @IBOutlet weak var activity: UIActivityIndicatorView!
@@ -18,6 +29,8 @@ class ViewController: UIViewController {
     var recipes: [Recipe] = []
     var allIngrids: [MainIngridient] = []
     var allIngridients: [Ingridient] = []
+    
+    var endOfEducation: EndOfEducation = EndOfEducation()
     
     // MARK: - GET DATA FROM FILE
     
@@ -31,8 +44,6 @@ class ViewController: UIViewController {
         var records = 0
         do {
             records = try context.count(for: fetchRequest)
-            print("recordsrecordsrecordsrecords")
-            print(records)
         } catch let error as NSError {
             print(error.localizedDescription)
         }
@@ -101,7 +112,6 @@ class ViewController: UIViewController {
     }
     
     func getDataFromRecipes() {
-        print("getdtatatatat")
         let fetchRequest: NSFetchRequest<Recipe> = Recipe.fetchRequest()
 
         var records = 0
@@ -161,38 +171,117 @@ class ViewController: UIViewController {
         
     }
     
+    func waitEndOfEducation() {
+        
+        let fetchRequest: NSFetchRequest<Recipe> = Recipe.fetchRequest()
+
+        var records = 0
+        do {
+            records = try context.count(for: fetchRequest)
+            print("Data is there already")
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+        guard records == 0,
+              !self.endOfEducation.closed else { return }
+            while !self.endOfEducation.closed {
+                print("fcbar")
+                sleep(UInt32(0.01))
+            }
+    }
+    
+    func qwerty() {
+        print("kek1")
+        print("This is run on a background queue")
+
+        print("lol1")
+        self.getDataFrom()
+        print("lol2")
+//
+        self.getDataFromAllIngrids()
+        print("lol3")
+        let fetchAllIngridsRequest: NSFetchRequest<MainIngridient>  = MainIngridient.fetchRequest()
+        do {
+            self.allIngrids = try self.context.fetch(fetchAllIngridsRequest)
+
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+            print("kek3")
+        print("lol4")
+        
+        
+        
+        self.getDataFromRecipes()
+        
+
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("no save: \(error)")
+        }
+        
+        waitEndOfEducation()
+        
+        DispatchQueue.main.async {
+            self.activity.stopAnimating()
+            self.performSegue(withIdentifier: "mainPage", sender: nil)
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        activity.startAnimating()
-        logoImg.image = UIImage(named: "logo")
         
-        DispatchQueue.main.async {
-            self.getDataFrom()
-        }
-        DispatchQueue.main.async {
-            self.getDataFromAllIngrids()
-            let fetchAllIngridsRequest: NSFetchRequest<MainIngridient>  = MainIngridient.fetchRequest()
-            do {
-                self.allIngrids = try self.context.fetch(fetchAllIngridsRequest)
+        DispatchQueue.global().async {
+//            let serialQueue = DispatchQueue(label: "serial-queue")
+            
+            let workItem1 = DispatchWorkItem {
+            self.qwerty()
+            }
+            
+            
+            let group = DispatchGroup()
+            
+            DispatchQueue.global().async(group: group, execute: workItem1)
+            
+            group.notify(queue: DispatchQueue.main) {
+//                DispatchQueue.main.async {
+//                    self.activity.stopAnimating()
+//                    self.performSegue(withIdentifier: "mainPage", sender: nil)
+//                }
+            }
 
-            } catch {
-                print(error.localizedDescription)
+        }
+        
+        print("kek2")
+        self.activity.startAnimating()
+        self.logoImg.image = UIImage(named: "logo")
+        
+        
+        let fetchRequest: NSFetchRequest<Ingridient> = Ingridient.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "name != nil")
+        var records = 0
+        do {
+            records = try context.count(for: fetchRequest)
+            print("Data is there already")
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+        
+        
+        print("lol5")
+        if records == 0 {
+            DispatchQueue.main.async {
+                print("kek33")
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "training") as! TrainingViewController
+                vc.endOfEducation = self.endOfEducation
+                self.present(vc, animated: true, completion: nil)
+            
             }
         }
-        DispatchQueue.main.async {
-            self.getDataFromRecipes()
-            self.activity.stopAnimating()
-        }
         
-        
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now(), execute: {
-            
-            self.performSegue(withIdentifier: "mainPage", sender: nil)
-            
-        }
-    )}
-
+    }
 
 }
-
