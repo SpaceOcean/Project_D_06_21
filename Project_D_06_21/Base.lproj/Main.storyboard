@@ -36,12 +36,20 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Ингредиенты" id="F3o-Dj-6AH">
                         <barButtonItem key="backBarButtonItem" title=" " id="D0M-qe-Zn9"/>
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="add" id="yl4-HV-9RW">
-                            <connections>
-                                <action selector="addInrid:" destination="IBM-Ff-x5f" id="aaH-4R-eyC"/>
-                                <segue destination="ejF-qP-Trc" kind="show" identifier="showCategory" id="VMl-Mb-Nxt"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem style="done" systemItem="add" id="yl4-HV-9RW">
+                                <connections>
+                                    <action selector="addInrid:" destination="IBM-Ff-x5f" id="aaH-4R-eyC"/>
+                                    <segue destination="ejF-qP-Trc" kind="show" identifier="showCategory" id="VMl-Mb-Nxt"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" style="plain" id="IQ2-ov-Bl3">
+                                <imageReference key="image" image="info" catalog="system" symbolScale="large"/>
+                                <connections>
+                                    <segue destination="lzB-6A-zFJ" kind="showDetail" id="4Mn-T0-fVP"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CfU-zt-0fF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -922,24 +930,85 @@
             <objects>
                 <viewController storyboardIdentifier="training" id="lzB-6A-zFJ" customClass="TrainingViewController" customModule="Project_D_06_21" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Il9-Cg-shD">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Обучалка" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RT1-T5-RMG">
-                                <rect key="frame" x="166" y="227" width="77" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="12" translatesAutoresizingMaskIntoConstraints="NO" id="neE-vt-G87">
+                                <rect key="frame" x="32" y="800" width="350" height="26"/>
+                                <color key="pageIndicatorTintColor" systemColor="opaqueSeparatorColor"/>
+                                <color key="currentPageIndicatorTintColor" systemColor="systemBlueColor"/>
+                            </pageControl>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eej-i8-f3p">
+                                <rect key="frame" x="102.5" y="76" width="209" height="453"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="eej-i8-f3p" secondAttribute="height" multiplier="1170:2532" id="27J-n1-aMa"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tvj-Zf-rUe">
+                                <rect key="frame" x="16" y="561" width="382" height="160"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="djY-zm-sqQ"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eDf-aj-4Tu">
+                                <rect key="frame" x="64" y="737" width="100" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="id9-rA-eq5"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Закрыть"/>
+                                <connections>
+                                    <action selector="leftButton:" destination="lzB-6A-zFJ" eventType="touchUpInside" id="5py-2m-F6l"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RVV-8d-Whz">
+                                <rect key="frame" x="250" y="737" width="100" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="t4p-ig-yNX"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Начать"/>
+                                <connections>
+                                    <action selector="rightButton:" destination="lzB-6A-zFJ" eventType="touchUpInside" id="Wq0-h9-kak"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Ec-ty-wCu"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="eDf-aj-4Tu" firstAttribute="top" secondItem="Tvj-Zf-rUe" secondAttribute="bottom" constant="16" id="7Aa-Bk-n9Q"/>
+                            <constraint firstItem="neE-vt-G87" firstAttribute="top" secondItem="eDf-aj-4Tu" secondAttribute="bottom" constant="32" id="Gdb-gA-tk4"/>
+                            <constraint firstItem="eDf-aj-4Tu" firstAttribute="centerY" secondItem="RVV-8d-Whz" secondAttribute="centerY" id="Lcv-Pg-mxZ"/>
+                            <constraint firstItem="Tvj-Zf-rUe" firstAttribute="top" secondItem="eej-i8-f3p" secondAttribute="bottom" constant="32" id="OqY-Ll-1SY"/>
+                            <constraint firstItem="neE-vt-G87" firstAttribute="leading" secondItem="6Ec-ty-wCu" secondAttribute="leading" constant="32" id="RKl-7p-rvW"/>
+                            <constraint firstItem="neE-vt-G87" firstAttribute="top" secondItem="RVV-8d-Whz" secondAttribute="bottom" constant="32" id="Xpm-pD-gZs"/>
+                            <constraint firstItem="eDf-aj-4Tu" firstAttribute="leading" secondItem="6Ec-ty-wCu" secondAttribute="leading" constant="64" id="a8P-SX-Rwc"/>
+                            <constraint firstItem="Tvj-Zf-rUe" firstAttribute="leading" secondItem="6Ec-ty-wCu" secondAttribute="leading" constant="16" id="alh-UK-qnH"/>
+                            <constraint firstItem="6Ec-ty-wCu" firstAttribute="trailing" secondItem="neE-vt-G87" secondAttribute="trailing" constant="32" id="cax-0T-7ul"/>
+                            <constraint firstItem="RVV-8d-Whz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eDf-aj-4Tu" secondAttribute="trailing" constant="5" id="gW1-nP-sKT"/>
+                            <constraint firstItem="eej-i8-f3p" firstAttribute="centerX" secondItem="6Ec-ty-wCu" secondAttribute="centerX" id="nfr-zM-O2f"/>
+                            <constraint firstItem="6Ec-ty-wCu" firstAttribute="trailing" secondItem="RVV-8d-Whz" secondAttribute="trailing" constant="64" id="ol4-5J-y3a"/>
+                            <constraint firstItem="eej-i8-f3p" firstAttribute="top" secondItem="6Ec-ty-wCu" secondAttribute="top" constant="32" id="ubm-Km-ScT"/>
+                            <constraint firstItem="6Ec-ty-wCu" firstAttribute="trailing" secondItem="Tvj-Zf-rUe" secondAttribute="trailing" constant="16" id="wKg-Rx-v4D"/>
+                            <constraint firstItem="6Ec-ty-wCu" firstAttribute="bottom" secondItem="neE-vt-G87" secondAttribute="bottom" constant="16" id="waP-YW-1ts"/>
+                            <constraint firstItem="eDf-aj-4Tu" firstAttribute="width" secondItem="RVV-8d-Whz" secondAttribute="width" id="wgd-01-cbr"/>
+                            <constraint firstItem="eDf-aj-4Tu" firstAttribute="height" secondItem="RVV-8d-Whz" secondAttribute="height" id="xc8-7S-5dT"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="leftBut" destination="eDf-aj-4Tu" id="HSY-jH-haZ"/>
+                        <outlet property="rightBut" destination="RVV-8d-Whz" id="RYP-hP-Cil"/>
+                        <outlet property="trainingImage" destination="eej-i8-f3p" id="1RZ-TN-COx"/>
+                        <outlet property="trainingLabel" destination="Tvj-Zf-rUe" id="eDS-4f-CAb"/>
+                        <outlet property="trainingPageControl" destination="neE-vt-G87" id="6r9-Za-YUl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y3r-8r-ctf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="698" y="-603"/>
+            <point key="canvasLocation" x="1625" y="-613"/>
         </scene>
         <!--Ингредиенты-->
         <scene sceneID="q2O-iM-Oeh">
@@ -1318,6 +1387,7 @@
         <image name="chevron.right" catalog="system" width="96" height="128"/>
         <image name="circle" catalog="system" width="128" height="121"/>
         <image name="house" catalog="system" width="128" height="106"/>
+        <image name="info" catalog="system" width="93" height="128"/>
         <image name="info.circle" catalog="system" width="128" height="121"/>
         <image name="newspaper" catalog="system" width="128" height="111"/>
         <image name="plus" catalog="system" width="128" height="113"/>
@@ -1327,11 +1397,17 @@
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
