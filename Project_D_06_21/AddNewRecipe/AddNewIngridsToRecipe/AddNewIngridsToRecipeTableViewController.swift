@@ -104,7 +104,7 @@ class AddNewIngridsToRecipeTableViewController: UITableViewController, NSFetched
         
         let largeConfig = UIImage.SymbolConfiguration(scale: .large)
         
-        if let _ = (newRecipe.ingridNormalIndex)?.firstIndex(of: indexPath.row)  {
+        if let _ = (newRecipe.ingridNormalIndex)?.firstIndex(of: Int(ingrid.curIndex))  {
             cell.addIngridButton.setImage(UIImage(systemName: "checkmark.square", withConfiguration: largeConfig), for: .normal)
         } else {
             cell.addIngridButton.setImage(UIImage(systemName: "square", withConfiguration: largeConfig), for: .normal)
