@@ -48,44 +48,94 @@ class AddNewRecipeTableViewController: UITableViewController, UIImagePickerContr
     @IBOutlet weak var difficultySC: UISegmentedControl!
     
     @IBAction func addNewRecipeButtonTapped(_ sender: Any) {
-        /*
+        var alerts: [String] = []
+        
+        
+        print("newRecipe.name")
+        print(newRecipe.name)
+        print(newRecipe.group)
+        print(newRecipe.ingredients)
+        print(newRecipe.ingridNormalIndex)
+        print(newRecipe.ingridIndex)
+        
+        print(newRecipe.group)
+        print(newRecipe.steps)
+        print(newRecipe.ingridIndex)
+        
+        
+        guard let name = newRecipe.name,
+              let group = newRecipe.group,
+              let ingredients = newRecipe.ingredients,
+              let ingridNormalIndex = newRecipe.ingridNormalIndex,
+              let ingridIndex = newRecipe.ingridIndex,
+              let steps = newRecipe.steps,
+              !(newRecipe.name?.isEmpty ?? true),
+              !(newRecipe.group?.isEmpty ?? true),
+              !(newRecipe.ingredients?.isEmpty ?? true),
+              !(newRecipe.steps?.isEmpty ?? true)
+        else {
+            if newRecipe.name?.isEmpty ?? false { alerts.append("название") }
+            if newRecipe.group?.isEmpty ?? false { alerts.append("категорию") }
+            if newRecipe.ingredients?.isEmpty ?? false { alerts.append("ингредиенты") }
+            if newRecipe.steps?.isEmpty ?? false { alerts.append("шаги готовки") }
+            
+            var alertText = ""
+            for (index, alert) in alerts.enumerated() {
+                if index == alerts.count-1 {
+                    alertText += alert + "."
+                } else {
+                    alertText += alert + ", "
+                }
+            }
+            self.popupAlert(title: alertText)
+            return
+        }
+        
         lazy var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let entity = NSEntityDescription.entity(forEntityName: "Recipe", in: context)
         let recipe = NSManagedObject(entity: entity!, insertInto: context) as! Recipe
-        recipe.name = newRecipe.name
-        recipe.difficulty = newRecipe.difficulty
-        recipe.group = newRecipe.group
-        recipe.ingredients = newRecipe.ingredients
-        recipe.steps = newRecipe.steps
-
-        recipe.img = newRecipe.img
         
-        let ingrids = newRecipe.ingredients?.components(separatedBy: ";")
-        recipe.ingridCount = Int16(ingrids.count)
+        
+        
+        recipe.name = name
+        recipe.group = group
+        
+        recipe.ingredients = ingredients
+        recipe.ingridIndex = ingridIndex
+        recipe.ingridNormalIndex = ingridNormalIndex
+        recipe.ingridCount = Int16(ingridNormalIndex.count)
         recipe.ingridMatch = 0
         recipe.ingridMatchCount = 0
+
+        recipe.steps = steps
+        
+        
+        if let difficulty = difficultySC.titleForSegment(at: difficultySC.selectedSegmentIndex) {
+            switch difficulty {
+            case "Просто":
+                recipe.difficulty = "просто"
+            case "Средняя":
+                recipe.difficulty = "средняя"
+            case "Сложная":
+                recipe.difficulty = "сложно"
+            default:
+                recipe.difficulty = "просто"
+            }
+        }
+
+        recipe.img = newRecipe.img
         recipe.isMine = true
-
-        
-        // ingridIndex
-        var ingridIndex: Array<Int> = []
-
-        for ingrid in ingrids {
-            ingridIndex.append(Int(allIngrids.filter{ $0.name!.contains(ingrid) }[0].index))
-        }
-        recipe.ingridIndex = ingridIndex as [Int]
- 
+        recipe.isFavourite = false
         
         
-        // ingridNormalIndex
-        var ingridNormalIndex: Array<Int> = []
-        for ingrid in ingridIndex {
-            guard let newIndex = Optional(Int(allIngridients.filter{ $0.index!.components(separatedBy: ";").contains(String(ingrid)) }[0].curIndex)) else { return }
-            ingridNormalIndex.append(newIndex)
+        
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("no save: \(error)")
         }
         
-        recipe.ingridNormalIndex = ingridNormalIndex as [Int]
-         */
+        showToast(message: "Рецепт добавлен!", font: .systemFont(ofSize: 12.0))
     }
     
     override func viewDidLoad() {
@@ -119,6 +169,7 @@ class AddNewRecipeTableViewController: UITableViewController, UIImagePickerContr
         if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
             
             newRecipeImg.image = image
+            newRecipe.img = image.pngData()
         }
         newRecipeImg.contentMode = .scaleAspectFill
         newRecipeImg.clipsToBounds = true
@@ -141,9 +192,7 @@ class AddNewRecipeTableViewController: UITableViewController, UIImagePickerContr
             self.present(alertController, animated: true, completion: nil)
             
         }
-//        if indexPath.row == 4 {
-//            
-//        }
+        
         tableView.deselectRow(at: indexPath, animated: true)
         
     }
@@ -178,6 +227,25 @@ class AddNewRecipeTableViewController: UITableViewController, UIImagePickerContr
             
         }
     }
+    
+    func showToast(message : String, font: UIFont) {
+
+        let toastLabel = UILabel(frame: CGRect(x: 20, y: Int(self.view.frame.size.height) - 135, width: Int(self.view.frame.size.width) - 40, height: 35))
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        toastLabel.textColor = UIColor.white
+        toastLabel.font = font
+        toastLabel.textAlignment = .center;
+        toastLabel.text = message
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10;
+        toastLabel.clipsToBounds  =  true
+        self.view.addSubview(toastLabel)
+        UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
+             toastLabel.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
+    }
 }
 
 extension AddNewRecipeTableViewController: UITextFieldDelegate {
@@ -190,3 +258,12 @@ extension AddNewRecipeTableViewController: UITextFieldDelegate {
     }
 }
 
+extension AddNewRecipeTableViewController {
+    func popupAlert(title: String?) {
+        let alert = UIAlertController(title: "Упс!", message: "Вы забыли указать " + (title ?? ""), preferredStyle: .alert)
+         
+        alert.addAction(UIAlertAction(title: "Ок", style: .default, handler: nil))
+         
+        self.present(alert, animated: true)
+    }
+}

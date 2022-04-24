@@ -9,18 +9,7 @@
 import UIKit
 import CoreData
 
-
-public class EndOfEducation {
-    var closed: Bool = false
-    
-    init() {
-        self.closed = false
-    }
-}
-
 class ViewController: UIViewController {
-    
-
 
     @IBOutlet weak var logoImg: UIImageView!
     @IBOutlet weak var activity: UIActivityIndicatorView!
@@ -29,8 +18,6 @@ class ViewController: UIViewController {
     var recipes: [Recipe] = []
     var allIngrids: [MainIngridient] = []
     var allIngridients: [Ingridient] = []
-    
-    var endOfEducation: EndOfEducation = EndOfEducation()
     
     // MARK: - GET DATA FROM FILE
     
@@ -44,6 +31,8 @@ class ViewController: UIViewController {
         var records = 0
         do {
             records = try context.count(for: fetchRequest)
+            print("recordsrecordsrecordsrecords")
+            print(records)
         } catch let error as NSError {
             print(error.localizedDescription)
         }
@@ -72,6 +61,8 @@ class ViewController: UIViewController {
         
         do {
             allIngridients = try context.fetch(fetchRequest)
+            //allIngridients.sort(by: { $0.name! < $1.name! })
+
         } catch {
             print(error.localizedDescription)
         }
@@ -110,6 +101,7 @@ class ViewController: UIViewController {
     }
     
     func getDataFromRecipes() {
+        print("getdtatatatat")
         let fetchRequest: NSFetchRequest<Recipe> = Recipe.fetchRequest()
 
         var records = 0
@@ -169,88 +161,37 @@ class ViewController: UIViewController {
         
     }
     
-    func waitEndOfEducation() {
-        while !self.endOfEducation.closed {
-            sleep(UInt32(0.01))
-        }
-    }
-    
-    func addData() {
-        let fetchRequest: NSFetchRequest<Recipe> = Recipe.fetchRequest()
-
-        var records = 0
-        do {
-            records = try context.count(for: fetchRequest)
-            print("Data is there already")
-        } catch let error as NSError {
-            print(error.localizedDescription)
-        }
-        if records != 0 {
-            self.endOfEducation.closed = true
-        }
-        
-        self.getDataFrom()
-        self.getDataFromAllIngrids()
-
-        let fetchAllIngridsRequest: NSFetchRequest<MainIngridient>  = MainIngridient.fetchRequest()
-        do {
-            self.allIngrids = try self.context.fetch(fetchAllIngridsRequest)
-
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-        self.getDataFromRecipes()
-
-        do {
-            try context.save()
-        } catch let error as NSError {
-            print("no save: \(error)")
-        }
-        
-        waitEndOfEducation()
-        
-        DispatchQueue.main.async {
-            self.activity.stopAnimating()
-            self.performSegue(withIdentifier: "mainPage", sender: nil)
-        }
-    }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        activity.startAnimating()
+        logoImg.image = UIImage(named: "logo")
         
-        DispatchQueue.global().async {
-            
-            let workItem = DispatchWorkItem {
-            self.addData()
-            }
-            
-            let group = DispatchGroup()
-            
-            DispatchQueue.global().async(group: group, execute: workItem)
+        DispatchQueue.main.async {
+            self.getDataFrom()
         }
-        
-        self.activity.startAnimating()
-        self.logoImg.image = UIImage(named: "logo")
-        
-        
-        let fetchRequest: NSFetchRequest<Ingridient> = Ingridient.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "name != nil")
-        var records = 0
-        do {
-            records = try context.count(for: fetchRequest)
-            print("Data is there already")
-        } catch let error as NSError {
-            print(error.localizedDescription)
-        }
-        
-        if records == 0 {
-            DispatchQueue.main.async {
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "training") as! TrainingViewController
-                vc.endOfEducation = self.endOfEducation
-                self.present(vc, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.getDataFromAllIngrids()
+            let fetchAllIngridsRequest: NSFetchRequest<MainIngridient>  = MainIngridient.fetchRequest()
+            do {
+                self.allIngrids = try self.context.fetch(fetchAllIngridsRequest)
+
+            } catch {
+                print(error.localizedDescription)
             }
         }
-    }
+        DispatchQueue.main.async {
+            self.getDataFromRecipes()
+            self.activity.stopAnimating()
+        }
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now(), execute: {
+            
+            self.performSegue(withIdentifier: "mainPage", sender: nil)
+            
+        }
+    )}
+
+
 }

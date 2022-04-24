@@ -14,10 +14,11 @@ class AddNewIngridsToRecipeTableViewController: UITableViewController, NSFetched
     
     @IBOutlet var table: UITableView!
     
+    var fetchedResultsControllerAllMainIngrids: NSFetchedResultsController<MainIngridient>!
     var fetchedResultsController: NSFetchedResultsController<Ingridient>!
     var ingridients: [Ingridient] = []
     var allIngridients: [Ingridient] = []
-    var curIngridients: [Ingridient] = []
+    var allMainIngrids: [MainIngridient] = []
     private var filteredCurIngridients: [Ingridient] = []
     private var searchBarIsEmpty: Bool {
         guard let text = searchController.searchBar.text else { return false }
@@ -35,6 +36,21 @@ class AddNewIngridsToRecipeTableViewController: UITableViewController, NSFetched
     lazy var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewWillAppear(_ animated: Bool) {
+        let fetchRequestAllMainIngrids: NSFetchRequest<MainIngridient> = MainIngridient.fetchRequest()
+        let sortDescriptorAllMainIngrids = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequestAllMainIngrids.sortDescriptors = [sortDescriptorAllMainIngrids]
+        fetchedResultsControllerAllMainIngrids = NSFetchedResultsController(fetchRequest: fetchRequestAllMainIngrids, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsControllerAllMainIngrids.delegate = self
+        do {
+            try fetchedResultsControllerAllMainIngrids.performFetch()
+            allMainIngrids = fetchedResultsControllerAllMainIngrids.fetchedObjects!
+            allMainIngrids = try context.fetch(fetchRequestAllMainIngrids)
+
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        
         let fetchRequest: NSFetchRequest<Ingridient>  = Ingridient.fetchRequest()
 
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
@@ -47,7 +63,6 @@ class AddNewIngridsToRecipeTableViewController: UITableViewController, NSFetched
         }
         do {
             ingridients = try context.fetch(fetchRequest)
-            // ingridients.sort(by: { $0.name! < $1.name! })
 
         } catch {
             print(error.localizedDescription)
@@ -83,8 +98,6 @@ class AddNewIngridsToRecipeTableViewController: UITableViewController, NSFetched
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "addNewIngridsToRecipe") as! AddNewIngridsToRecipeTableViewCell
-        print("IngridientCell")
-//        print(ingridients.count)
         cell.addIngrigNameLabel.text = ingrid.name
         cell.addIngridButton.tag = indexPath.row
         cell.addIngridButton.addTarget(self, action: #selector(addButtonTapped(sender:)), for: .touchUpInside)
@@ -118,10 +131,29 @@ class AddNewIngridsToRecipeTableViewController: UITableViewController, NSFetched
             (newRecipe.ingridNormalIndex)?.append(normalIndex)
         }
         
-        print("newRecipe.ingridNormalIndex")
-//        print(newRecipe.ingridNormalIndex)
-        
-        
+        if let bufIngridNormalIndex = newRecipe.ingridNormalIndex {
+            var bufIngredients = ""
+            var bufIngridIndex: [Int] = []
+            for normalIngridIndex in bufIngridNormalIndex {
+                let normalIngrid = ingridients[normalIngridIndex]
+                let ingridIndex = Int(normalIngrid.index?.components(separatedBy: ";")[0] ?? "-1")
+                if let ingridIndex = ingridIndex {
+                    bufIngridIndex.append(ingridIndex)
+                    if let bufMainIngrid = allMainIngrids[ingridIndex+1].name {
+                        bufIngredients = bufIngredients + String(bufMainIngrid) + ";"
+                    }
+                }
+            }
+            
+            if bufIngredients.count != 0 {
+                bufIngredients = String(bufIngredients.dropLast())
+                newRecipe.ingredients = bufIngredients
+                newRecipe.ingridIndex = bufIngridIndex
+            }
+            
+        } else {
+            
+        }
         table.reloadData()
     }
 

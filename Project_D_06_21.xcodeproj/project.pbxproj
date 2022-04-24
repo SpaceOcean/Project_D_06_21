@@ -105,7 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				B22432E02808925E0046CD39 /* AddNewRecipeTableViewController.swift */,
-				B22432EC280AFA110046CD39 /* AddStepsToRecipeViewController.swift */,
+				B2F30A542814551500B42935 /* AddStepsToRecipe */,
 				B22432EB280AF9AA0046CD39 /* AddNewIngridsToRecipe */,
 				B2F30A532814177200B42935 /* AddGroupToRecipe */,
 			);
@@ -257,6 +257,14 @@
 				B2F30A512814176B00B42935 /* AddGroupToRecipeTableViewCell.swift */,
 			);
 			path = AddGroupToRecipe;
+			sourceTree = "<group>";
+		};
+		B2F30A542814551500B42935 /* AddStepsToRecipe */ = {
+			isa = PBXGroup;
+			children = (
+				B22432EC280AFA110046CD39 /* AddStepsToRecipeViewController.swift */,
+			);
+			path = AddStepsToRecipe;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

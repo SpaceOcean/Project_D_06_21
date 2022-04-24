@@ -49,7 +49,7 @@ class AddStepsToRecipeViewController: UIViewController, UITextViewDelegate {
         stepsEditing = true
         if textView.textColor == UIColor.lightGray {
             textView.text = nil
-            textView.textColor = UIColor.black
+            textView.textColor = UIColor.label
         }
     }
     

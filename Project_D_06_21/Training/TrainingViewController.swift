@@ -43,7 +43,7 @@ class TrainingViewController: UIViewController {
                     TrainingScreen(index: 12, text: "Также любой рецепт можно добавить в избранное. Достаточно открыть рецепт и нажать одноимённую кнопку.", buttonStyle: .last) ]
     
     
-    var endOfEducation: EndOfEducation = EndOfEducation()
+//    var endOfEducation: EndOfEducation = EndOfEducation()
     
     @IBOutlet weak var trainingImage: UIImageView!
     @IBOutlet weak var trainingLabel: UILabel!
@@ -127,7 +127,7 @@ class TrainingViewController: UIViewController {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        self.endOfEducation.closed = true
+//        self.endOfEducation.closed = true
     }
 }
 

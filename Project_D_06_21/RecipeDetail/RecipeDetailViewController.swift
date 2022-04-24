@@ -120,12 +120,15 @@ extension RecipeDetailViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "ingridientId", for: indexPath) as? IngredientsDetailViewCell {
             cell.ingridName.text = arrayOfIngredients[indexPath.row]
-            if arrayOfUserIngridients.contains(recipeItem.ingridNormalIndex![indexPath.row]) {
-                cell.accessoryType = UITableViewCell.AccessoryType.checkmark
+            if !arrayOfUserIngridients.isEmpty {
+                if arrayOfUserIngridients.contains(recipeItem.ingridNormalIndex![indexPath.row]) {
+                    cell.accessoryType = UITableViewCell.AccessoryType.checkmark
+                } else {
+                    cell.accessoryType = UITableViewCell.AccessoryType.none
+                }
             } else {
                 cell.accessoryType = UITableViewCell.AccessoryType.none
             }
-            
             return cell
         }
         
