@@ -134,9 +134,6 @@ class FilterRecipeViewController: UITableViewController {
                        print("error")
                 }
                
-               
-               
-               
                return cell
            }
         

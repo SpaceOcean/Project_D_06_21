@@ -50,19 +50,6 @@ class AddNewRecipeTableViewController: UITableViewController, UIImagePickerContr
     @IBAction func addNewRecipeButtonTapped(_ sender: Any) {
         var alerts: [String] = []
         
-        
-        print("newRecipe.name")
-        print(newRecipe.name)
-        print(newRecipe.group)
-        print(newRecipe.ingredients)
-        print(newRecipe.ingridNormalIndex)
-        print(newRecipe.ingridIndex)
-        
-        print(newRecipe.group)
-        print(newRecipe.steps)
-        print(newRecipe.ingridIndex)
-        
-        
         guard let name = newRecipe.name,
               let group = newRecipe.group,
               let ingredients = newRecipe.ingredients,
@@ -230,7 +217,7 @@ class AddNewRecipeTableViewController: UITableViewController, UIImagePickerContr
     
     func showToast(message : String, font: UIFont) {
 
-        let toastLabel = UILabel(frame: CGRect(x: 20, y: Int(self.view.frame.size.height) - 135, width: Int(self.view.frame.size.width) - 40, height: 35))
+        let toastLabel = UILabel(frame: CGRect(x: 20, y: 60, width: Int(self.view.frame.size.width) - 40, height: 35))
         toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         toastLabel.textColor = UIColor.white
         toastLabel.font = font

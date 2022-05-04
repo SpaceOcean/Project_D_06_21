@@ -76,9 +76,12 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
     }
     
     private func uploadIngridMatch() {
-        let recipeFetchRequest: NSFetchRequest<Recipe> = Recipe.fetchRequest()
+        let sortRecipeFetchRequest: NSFetchRequest<Recipe>  = Recipe.fetchRequest()
+
+        let sortRecipeDescriptor = NSSortDescriptor(key: "ingridMatch", ascending: false)
+        sortRecipeFetchRequest.sortDescriptors = [sortRecipeDescriptor]
         do {
-            recipes = uploadRecipesList(recipes: try context.fetch(recipeFetchRequest))
+            recipes = uploadRecipesList(recipes: try context.fetch(sortRecipeFetchRequest))
         } catch {
             print(error.localizedDescription)
         }
@@ -119,8 +122,8 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
         } catch let error as NSError {
             print("no save: \(error)")
         }
-        recipesTable.reloadData()
         
+        recipesTable.reloadData()
     }
     
     func getFilterArrays() {
@@ -134,8 +137,8 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
         } catch {
             print(error.localizedDescription)
         }
-        self.filter.allGroups = Array(Set(recipes.map{ return $0.group ?? "" }))
-        self.filter.allDifficultys = Array(Set(recipes.map{ return $0.difficulty ?? "" }))
+        self.filter.allGroups = recipes.map{ return $0.group ?? "" }.unique{ $0 }
+        self.filter.allDifficultys = recipes.map{ return $0.difficulty ?? "" }.unique{ $0 }
         recipesTable.reloadData()
     }
 
@@ -145,7 +148,8 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
         getNormalIngridientsList()
         getFilterArrays()
         uploadIngridMatch()
-
+        
+        recipesTable.reloadData()
         // Setup the Search Controller
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -158,21 +162,11 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
-        uploadIngridMatch()
-
-        let sortRecipeFetchRequest: NSFetchRequest<Recipe>  = Recipe.fetchRequest()
-
-        let sortDescriptor = NSSortDescriptor(key: "ingridMatch", ascending: false)
-        sortRecipeFetchRequest.sortDescriptors = [sortDescriptor]
-
-        do {
-            recipes = uploadRecipesList(recipes: try context.fetch(sortRecipeFetchRequest))
-        } catch {
-            print(error.localizedDescription)
-        }
-
         getFilterArrays()
+
+        uploadIngridMatch()
+        
+        recipesTable.reloadData()
     }
     
     // MARK: - TABLE VIEW CELL
@@ -269,5 +263,20 @@ extension RecipesViewController: UISearchResultsUpdating {
             return recipe.name?.lowercased().contains(searchText.lowercased()) ?? false
         })
         recipesTable.reloadData()
+    }
+}
+
+extension Array {
+    func unique<T:Hashable>(map: ((Element) -> (T)))  -> [Element] {
+        var set = Set<T>()
+        var arrayOrdered = [Element]()
+        for value in self {
+            if !set.contains(map(value)) {
+                set.insert(map(value))
+                arrayOrdered.append(value)
+            }
+        }
+
+        return arrayOrdered
     }
 }
