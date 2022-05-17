@@ -122,18 +122,19 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
         } catch let error as NSError {
             print("no save: \(error)")
         }
-        
+        do {
+            recipes = uploadRecipesList(recipes: try context.fetch(sortRecipeFetchRequest))
+        } catch {
+            print(error.localizedDescription)
+        }
         recipesTable.reloadData()
     }
     
     func getFilterArrays() {
-        let sortRecipeFetchRequest: NSFetchRequest<Recipe>  = Recipe.fetchRequest()
-        
-        let sortDescriptor = NSSortDescriptor(key: "ingridMatch", ascending: false)
-        sortRecipeFetchRequest.sortDescriptors = [sortDescriptor]
-        
+        let recipeFetchRequest: NSFetchRequest<Recipe>  = Recipe.fetchRequest()
+       
         do {
-            recipes = try context.fetch(sortRecipeFetchRequest)
+            recipes = try context.fetch(recipeFetchRequest) // test
         } catch {
             print(error.localizedDescription)
         }
@@ -162,10 +163,10 @@ class RecipesViewController: UITableViewController, NSFetchedResultsControllerDe
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        getFilterArrays()
-
-        uploadIngridMatch()
-        
+        DispatchQueue.main.async {
+            self.getFilterArrays()
+            self.uploadIngridMatch()
+        }
         recipesTable.reloadData()
     }
     
